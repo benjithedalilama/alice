@@ -2,14 +2,8 @@ version: "3"
 services:
   frontend:
     image: benjithedalilama/alice:MVP-frontend
-    volumes:
-      - $PWD/frontend:/app
     environment:
-      - CHOKIDAR_USEPOLLING=true
-      - NODE_ENV=development
-    ports:
-      - "3000:3000"
-      - "35729:35729"
+      - NODE_ENV=production
     networks:
       - webnet
   backend:
@@ -23,9 +17,7 @@ services:
       restart_policy:
         condition: on-failure
     environment:
-      - NODE_ENV=development
-    ports:
-      - "5000:8080"
+      - NODE_ENV=production
     networks:
       - webnet
 networks:
