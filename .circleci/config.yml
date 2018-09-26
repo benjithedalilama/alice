@@ -19,9 +19,9 @@ jobs:
     steps:
       - restore_cache:
           keys:
-          - v1.1-dependencies-{{ checksum "./frontend/package.json" }}
-          - v1.1-dependencies-{{ checksum "./backend/package.json" }}
-          - v1.1-dependencies-
+          - v1-dependencies-{{ checksum "./frontend/package.json" }}
+          - v1-dependencies-{{ checksum "./backend/package.json" }}
+          - v1-dependencies-
 
       - checkout
       - setup_remote_docker
@@ -32,7 +32,7 @@ jobs:
           paths:
             - ./frontend/node_modules
           key:
-            - v1.1-dependencies-{{ checksum "./frontend/package.json" }}
+            - v1-dependencies-{{ checksum "./frontend/package.json" }}
 
       - run: cd frontend && yarn test
 
@@ -42,6 +42,6 @@ jobs:
           paths:
             - ./backend/node_modules
           key:
-            - v1.1-dependencies-{{ checksum "./backend/package.json" }}
+            - v1-dependencies-{{ checksum "./backend/package.json" }}
 
       - run: cd backend && yarn test
