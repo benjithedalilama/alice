@@ -22,9 +22,9 @@ jobs:
 
       - save_cache:
           paths:
-            - frontend/node_modules
+            - ./frontend/node_modules
           key:
-            - v2-frontend-dependencies
+            - v2-frontend-
 
       - run: cd frontend && yarn test
 
