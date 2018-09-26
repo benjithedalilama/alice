@@ -17,32 +17,31 @@ jobs:
     working_directory: ~/repo
 
     steps:
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "./frontend/package.json" }}
+          - v1-dependencies-{{ checksum "./backend/package.json" }}
+          - v1-dependencies-
+
       - checkout
       - setup_remote_docker
-      - run: ls -l ~/repo
-
-      # - restore_cache:
-      #     keys:
-      #     - v1-dependencies-{{ checksum "package.json" }}
-      #     - v1-dependencies-
 
       - run: cd frontend && yarn install
-      #
-      # - save_cache:
-      #     paths:
-      #       - node_modules
-      #     keys:
-      #       - v1-dependencies-{{ checksum "frontend/package.json" }}
-      #       - v1-dependencies-{{ checksum "backend/package.json" }}
+
+      - save_cache:
+          paths:
+            - ./frontend/node_modules
+          keys:
+            - v1-dependencies-{{ checksum "./frontend/package.json" }}
 
       - run: cd frontend && yarn test
 
       - run: cd backend && yarn install
 
-      # - save_cache:
-      #     paths:
-      #       - frontend/node_modules
-      #       - backend/node_modules
-      #     key: v1-dependencies-{{ checksum "package.json" }}
+      - save_cache:
+          paths:
+            - ./backend/node_modules
+          keys:
+            - v1-dependencies-{{ checksum "./backend/package.json" }}
 
       - run: cd backend && yarn test
