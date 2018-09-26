@@ -19,6 +19,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run: ls -l ~/repo
 
       # - restore_cache:
       #     keys:
@@ -27,7 +28,7 @@ jobs:
 
       - run: cd frontend
       - run: yarn install
-      # 
+      #
       # - save_cache:
       #     paths:
       #       - node_modules
