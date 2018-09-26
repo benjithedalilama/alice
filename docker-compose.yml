@@ -1,29 +1,29 @@
 version: "3"
 services:
-  web:
+  frontend:
     image: benjithedalilama/alice:MVP-frontend
-    deploy:
-      replicas: 2
-      resources:
-        limits:
-          cpus: "0.1"
-          memory: 50M
-      restart_policy:
-        condition: on-failure
+    volumes:
+      - $PWD/frontend:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=development
     ports:
-      - "1337:80"
+      - "3000:3000"
+      - "35729:35729"
     networks:
       - webnet
-  app:
+  backend:
     image: benjithedalilama/alice:MVP
     deploy:
-      replicas: 2
+      replicas: 5
       resources:
         limits:
           cpus: "0.1"
           memory: 50M
       restart_policy:
         condition: on-failure
+    environment:
+      - NODE_ENV=development
     ports:
       - "5000:8080"
     networks:
