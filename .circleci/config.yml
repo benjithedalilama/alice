@@ -26,8 +26,7 @@ jobs:
       #     - v1-dependencies-{{ checksum "package.json" }}
       #     - v1-dependencies-
 
-      - run: cd frontend
-      - run: yarn install
+      - run: cd frontend && yarn install
       #
       # - save_cache:
       #     paths:
@@ -36,14 +35,14 @@ jobs:
       #       - v1-dependencies-{{ checksum "frontend/package.json" }}
       #       - v1-dependencies-{{ checksum "backend/package.json" }}
 
-      - run: yarn test
+      - run: cd frontend && yarn test
 
-      - run: cd ../backend
-      - run: yarn install
+      - run: cd backend && yarn install
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+      # - save_cache:
+      #     paths:
+      #       - frontend/node_modules
+      #       - backend/node_modules
+      #     key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: yarn test
+      - run: cd backend && yarn test
