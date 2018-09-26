@@ -22,7 +22,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-{{ checksum "frontend/package.json" }}
+          - v1-dependencies-{{ checksum "backend/package.json" }}
           - v1-dependencies-
 
       - run: cd frontend
@@ -31,7 +32,9 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          keys:
+            - v1-dependencies-{{ checksum "frontend/package.json" }}
+            - v1-dependencies-{{ checksum "backend/package.json" }}
 
       - run: yarn test
 
