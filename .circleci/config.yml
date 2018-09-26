@@ -20,21 +20,20 @@ jobs:
       - checkout
       - setup_remote_docker
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "frontend/package.json" }}
-          - v1-dependencies-{{ checksum "backend/package.json" }}
-          - v1-dependencies-
+      # - restore_cache:
+      #     keys:
+      #     - v1-dependencies-{{ checksum "package.json" }}
+      #     - v1-dependencies-
 
       - run: cd frontend
       - run: yarn install
-
-      - save_cache:
-          paths:
-            - node_modules
-          keys:
-            - v1-dependencies-{{ checksum "frontend/package.json" }}
-            - v1-dependencies-{{ checksum "backend/package.json" }}
+      # 
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #     keys:
+      #       - v1-dependencies-{{ checksum "frontend/package.json" }}
+      #       - v1-dependencies-{{ checksum "backend/package.json" }}
 
       - run: yarn test
 
