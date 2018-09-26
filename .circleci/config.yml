@@ -13,27 +13,27 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - v2-frontend-dependencies
-            - v2-backend-dependencies
+            - my-cache
+            - my-cache-2
 
       - checkout
 
       - run: cd frontend && yarn install
 
       - save_cache:
+          key: my-cache
           paths:
-            - ./frontend/node_modules
-          key:
-            - v2-frontend-
+            - ~/frontend/node_modules
+
 
       - run: cd frontend && yarn test
 
       - run: cd backend && yarn install
 
       - save_cache:
+          key: my-cache-2
           paths:
-            - ./backend/node_modules
-          key:
-            - v2-backend-dependencies
+            - ~/backend/node_modules
+
 
       - run: cd backend && yarn test
