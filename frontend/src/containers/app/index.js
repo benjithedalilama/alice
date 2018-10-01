@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom'
-import { withRouter } from 'react-router'
 import Home from '../home'
 import About from '../about'
 
