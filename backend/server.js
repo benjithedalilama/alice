@@ -29,6 +29,7 @@ app.get(base_path + '/users/:id', (req, res) => {
 
 app.post(base_path + '/users', (req, res) => {
   const user = new User(req.body)
+  console.log(user)
   user.save(function(err) {
     if (err) return console.error(err)
     res.send(user)
