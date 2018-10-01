@@ -1,6 +1,7 @@
 const express = require('express')
 const User = require('./models/User')
 const db = require('./db')
+const bodyParser = require('body-parser');
 
 const PORT = 8080
 const HOST = '0.0.0.0'
@@ -8,6 +9,8 @@ const HOST = '0.0.0.0'
 const app = express()
 
 const base_path = '/api/v1'
+
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
   res.send('Hello world!\n')
@@ -29,7 +32,7 @@ app.get(base_path + '/users/:id', (req, res) => {
 
 app.post(base_path + '/users', (req, res) => {
   const user = new User(req.body)
-  console.log(user)
+  console.log(req.body)
   user.save(function(err) {
     if (err) return console.error(err)
     res.send(user)
