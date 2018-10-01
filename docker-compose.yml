@@ -1,14 +1,14 @@
 version: "3"
 services:
   frontend:
-    image: benjithedalilama/alice:MVP-frontend
+    image: benjithedalilama/alice-frontend:MVP
     restart: always
     environment:
       - NODE_ENV=production
     networks:
       - webnet
   backend:
-    image: benjithedalilama/alice:MVP
+    image: benjithedalilama/alice-backend:MVP
     deploy:
       replicas: 5
       resources:
