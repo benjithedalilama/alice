@@ -1,17 +1,8 @@
 version: "2"
 services:
-  frontend:
-    image: benjithedalilama/alice-frontend:MVP
-    fip: 209.177.88.202
-    size: s4
-    restart: always
-    environment:
-      - NODE_ENV=production
-    ports:
-      - "3000:3000"
-      - "35729:35729"
   backend:
     image: benjithedalilama/alice-backend:MVP
+    fip: 209.177.88.202
     size: s4
     environment:
       - NODE_ENV=production
