@@ -1,0 +1,32 @@
+version: "2"
+services:
+  frontend:
+    image: benjithedalilama/alice-frontend:MVP
+    fip: 209.177.88.202
+    size: s4
+    restart: always
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
+      - "35729:35729"
+  backend:
+    image: benjithedalilama/alice-backend:MVP
+    size: s4
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    size: s4
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
