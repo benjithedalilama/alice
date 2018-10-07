@@ -1,28 +1,17 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
       - image: circleci/node:10.11
-
     working_directory: ~/repo
-
     steps:
       - restore_cache:
           keys:
             - my-cache
-            - my-cache-2
-
       - checkout
-
-      - run: cd backend && yarn install
-
+      - run: cd app && yarn install
       - save_cache:
-          key: my-cache-2
+          key: my-cache
           paths:
-            - ~/backend/node_modules
-
-      - run: cd backend && yarn test
+            - ~/app/node_modules
+      - run: cd app && yarn test
