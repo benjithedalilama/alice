@@ -1,12 +1,9 @@
 defaults: &defaults
   docker:
     - image: circleci/node:10.11
-  working_directory: ~/repo
+  working_directory: ~/alice-backend
   environment:
     NODE_ENV: "production"
-  filters:
-    branches:
-      only: master
 
 version: 2
 jobs:
@@ -51,3 +48,6 @@ workflows:
       - deploy:
           requires:
             - test
+          filters:
+            branches:
+              only: master
