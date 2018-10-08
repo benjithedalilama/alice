@@ -17,12 +17,12 @@ jobs:
           keys:
             - my-cache
       - checkout
-      - run: cd app && yarn install
+      - run: yarn install
       - save_cache:
           key: my-cache
           paths:
-            - ~/app/node_modules
-      - run: cd app && yarn test
+            - ~/node_modules
+      - run: yarn test
   deploy:
     <<: *defaults
     steps:
@@ -42,7 +42,7 @@ jobs:
           command: ./hyper config --secretkey $HYPER_SECRET_KEY --accesskey $HYPER_ACCESS_KEY --default-region us-west-1
       - run:
           name: Deploy Master to Hyper.sh
-          command: cd app && yarn deploy
+          command: yarn deploy
 workflows:
   version: 2
   test-and-deploy:
