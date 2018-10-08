@@ -1,7 +1,7 @@
 version: "2"
 services:
   backend:
-    image: benjithedalilama/alice-backend
+    image: benjithedalilama/alice-backend:MVP
     fip: 209.177.88.202
     size: s4
     environment:
