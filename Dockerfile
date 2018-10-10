@@ -7,4 +7,4 @@ RUN yarn install
 COPY . .
 EXPOSE 8080
 
-CMD [ "node", "api.js" ]
+CMD [ "node", "index.js" ]
