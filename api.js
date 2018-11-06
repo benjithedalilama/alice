@@ -32,7 +32,7 @@ app.get(base_path + '/users/:username', (req, res, next) => {
 })
 
 app.put(base_path + '/users/:username', (req, res, next) => {
-  User.findOne({ "username": req.params.username }, function (err, user) {
+  User.findOne({ username: req.params.username }, function (err, user) {
     if (err) return next(err)
     user = User(req.body)
     user.save(function(err) {
