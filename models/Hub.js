@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const HubSchema = new Schema({
-    id: Schema.Types.ObjectId,
+    id: mongoose.Types.ObjectId,
     name: String,
     location: [Number, Number],
     createdAt: Date,

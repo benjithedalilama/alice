@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const ControlCodeSchema = new Schema({
-    id: Schema.Types.ObjectId,
+    id: mongoose.Types.ObjectId,
     version: String,
     commands: [String],
     hubId: String

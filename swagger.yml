@@ -943,6 +943,8 @@ definitions:
     properties:
       id:
         type: "string"
+      username:
+        type: "string"
       email:
         type: "string"
       hashed_password:

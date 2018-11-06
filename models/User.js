@@ -3,7 +3,8 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
-    id: Schema.Types.ObjectId,
+    id: mongoose.Types.ObjectId,
+    username: String,
     email: String,
     hashed_password: String
 })

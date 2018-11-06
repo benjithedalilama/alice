@@ -22,15 +22,15 @@ app.post(base_path + '/users', (req, res, next) => {
   })
 })
 
-app.get(base_path + '/users/:email', (req, res, next) => {
-  User.findOne({email: req.params.email}, function (err, user) {
+app.get(base_path + '/users/:username', (req, res, next) => {
+  User.findOne({username: req.params.username}, function (err, user) {
     if (err) return next(err)
     res.send(user)
   })
 })
 
-app.put(base_path + '/users/:email', (req, res, next) => {
-  User.findOne({email: req.params.email}, function (err, user) {
+app.put(base_path + '/users/:username', (req, res, next) => {
+  User.findOne({username: req.params.username}, function (err, user) {
     if (err) return next(err)
     user = User(req.body)
     user.save(function(err) {
