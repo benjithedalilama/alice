@@ -10,6 +10,8 @@ const app = express()
 
 const base_path = '/api'
 
+app.use(bodyParser.json())
+
 app.get('/', (req, res, next) => {
   res.send('Hello world!\n')
 })
@@ -23,14 +25,14 @@ app.post(base_path + '/users', (req, res, next) => {
 })
 
 app.get(base_path + '/users/:username', (req, res, next) => {
-  User.findOne({username: req.params.username}, function (err, user) {
+  User.findOne({ username: req.params.username }, function (err, user) {
     if (err) return next(err)
     res.send(user)
   })
 })
 
 app.put(base_path + '/users/:username', (req, res, next) => {
-  User.findOne({username: req.params.username}, function (err, user) {
+  User.findOne({ "username": req.params.username }, function (err, user) {
     if (err) return next(err)
     user = User(req.body)
     user.save(function(err) {
@@ -39,8 +41,6 @@ app.put(base_path + '/users/:username', (req, res, next) => {
     })
   })
 })
-
-app.use(bodyParser.json())
 
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
