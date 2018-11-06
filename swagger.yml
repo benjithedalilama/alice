@@ -663,7 +663,7 @@ paths:
           description: "Forbidden"
         404:
           description: "ControlCode controlCommand not found"
-  /user:
+  /users:
     post:
       tags:
       - "user"
@@ -682,7 +682,7 @@ paths:
       responses:
         default:
           description: "successful operation"
-  /user/login:
+  /users/login:
     get:
       tags:
       - "user"
@@ -719,7 +719,7 @@ paths:
               description: "date in UTC when token expires"
         400:
           description: "Invalid email/password supplied"
-  /user/logout:
+  /users/logout:
     get:
       tags:
       - "user"
@@ -733,7 +733,7 @@ paths:
       responses:
         default:
           description: "successful operation"
-  /user/{email}:
+  /users/{email}:
     get:
       tags:
       - "user"
@@ -942,8 +942,7 @@ definitions:
     type: "object"
     properties:
       id:
-        type: "integer"
-        format: "int64"
+        type: "string"
       email:
         type: "string"
       hashed_password:
@@ -955,8 +954,7 @@ definitions:
     - "location"
     properties:
       id:
-        type: "integer"
-        format: "int64"
+        type: "string"
       name:
         type: "string"
         example: "doggie"
@@ -973,8 +971,7 @@ definitions:
     type: "object"
     properties:
       id:
-        type: "integer"
-        format: "int64"
+        type: "string"
       type:
         type: "string"
         enum:
@@ -993,6 +990,8 @@ definitions:
   SensorReading:
     type: "object"
     properties:
+      id:
+        type: "string"
       createdAt:
         type: "string"
         format: "date-time"
@@ -1003,9 +1002,24 @@ definitions:
         - "readTemperature"
       data:
         type: "number"
+  ControlCode:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      version:
+        type: "string"
+      commands:
+        type: "array"
+        items:
+          type: "string"
+      hubId:
+        type: "string"
   ControlCommand:
     type: "object"
     properties:
+      id:
+        type: "string"
       createdAt:
         type: "string"
         format: "date-time"
@@ -1016,15 +1030,3 @@ definitions:
         - "setTemperature"
       data:
         type: "number"
-  ControlCode:
-    type: "object"
-    properties:
-      version:
-        type: "string"
-      commands:
-        type: "string"
-        enum:
-        - "setHumidity"
-        - "setTemperature"
-      hubId:
-        type: "string"

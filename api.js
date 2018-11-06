@@ -10,33 +10,45 @@ const app = express()
 
 const base_path = '/api'
 
-app.use(bodyParser.json())
-
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
   res.send('Hello world!\n')
 })
 
-app.get(base_path + '/users', (req, res) => {
-  User.find(function (err, user) {
-    if (err) return console.error(err)
-    res.send(user)
-  })
-})
-
-app.get(base_path + '/users/:id', (req, res) => {
-  User.findById(req.params.id, function (err, user) {
-    if (err) return console.error(err)
-    res.send(user)
-  })
-})
-
-app.post(base_path + '/users', (req, res) => {
+app.post(base_path + '/users', (req, res, next) => {
   const user = new User(req.body)
   user.save(function(err) {
-    if (err) return console.error(err)
+    if (err) return next(err)
     res.send(user)
   })
 })
+
+app.get(base_path + '/users/:email', (req, res, next) => {
+  User.findOne({email: req.params.email}, function (err, user) {
+    if (err) return next(err)
+    res.send(user)
+  })
+})
+
+app.put(base_path + '/users/:email', (req, res, next) => {
+  User.findOne({email: req.params.email}, function (err, user) {
+    if (err) return next(err)
+    user = User(req.body)
+    user.save(function(err) {
+      if (err) return next(err)
+      res.send(user)
+    })
+  })
+})
+
+app.use(bodyParser.json())
+
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
 
 app.listen(PORT, HOST)
 console.log(`Running on http://${HOST}:${PORT}`)
