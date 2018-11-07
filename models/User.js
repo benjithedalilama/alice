@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Hub from './models/Hub'
+import Hub from './Hub'
 
 const Schema = mongoose.Schema
 

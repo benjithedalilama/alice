@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import ControlCommand from './models/ControlCommand'
+import ControlCommand from './ControlCommand'
 
 const Schema = mongoose.Schema
 

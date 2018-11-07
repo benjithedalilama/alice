@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Sensor from './models/Sensor'
+import Sensor from './Sensor'
 
 const Schema = mongoose.Schema
 

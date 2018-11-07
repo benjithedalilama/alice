@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import SensorReading from './models/SensorReading'
+import SensorReading from './SensorReading'
 
 const Schema = mongoose.Schema
 
