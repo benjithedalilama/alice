@@ -1,10 +1,11 @@
 FROM node:10.11
-WORKDIR /usr/src/app
+WORKDIR /app
 COPY package.json ./
 COPY yarn.lock ./
 
+RUN yarn global add nodemon
 RUN yarn install
-COPY . .
+COPY . /app
 EXPOSE 8080
 
-CMD [ "node", "index.js" ]
+CMD [ "nodemon", "index.js" ]
