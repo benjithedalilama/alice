@@ -5,6 +5,9 @@ services:
       - NODE_ENV=development
     ports:
       - 8080:8080
+    volumes:
+      - .:/app
+    command: nodemon index.js
   mongo-express:
     image: mongo-express
     restart: always
