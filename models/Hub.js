@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import Sensor from './models/Sensor'
 
 const Schema = mongoose.Schema
 
@@ -7,7 +8,7 @@ const HubSchema = new Schema({
     name: String,
     location: [Number, Number],
     createdAt: Date,
-    userId: String
+    sensors: [Sensor.schema]
 })
 
 const Hub = mongoose.model('Hub', HubSchema)

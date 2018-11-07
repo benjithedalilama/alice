@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import ControlCommand from './models/ControlCommand'
 
 const Schema = mongoose.Schema
 
@@ -6,7 +7,7 @@ const ControlCodeSchema = new Schema({
     id: mongoose.Types.ObjectId,
     version: String,
     commands: [String],
-    hubId: String
+    controlCommands: [ControlCommand.schema]
 })
 
 const ControlCode = mongoose.model('ControlCode', ControlCodeSchema)

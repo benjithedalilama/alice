@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import SensorReading from './models/SensorReading'
 
 const Schema = mongoose.Schema
 
@@ -7,7 +8,7 @@ const SensorSchema = new Schema({
     type: String,
     location: [Number, Number],
     createdAt: Date,
-    hubId: String
+    sensorReadings: [SensorReading.schema]
 })
 
 const Sensor = mongoose.model('Sensor', SensorSchema)

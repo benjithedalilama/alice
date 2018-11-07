@@ -26,7 +26,7 @@ schemes:
 - "https"
 - "http"
 paths:
-  hubs/{hubId}/sensors:
+  /users/{userId}/hubs/{hubId}/sensors:
     post:
       tags:
       - "sensor"
@@ -38,6 +38,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "body"
         name: "body"
         description: "sensor object that needs to be added"
@@ -63,23 +68,29 @@ paths:
       - "application/json"
       parameters:
       - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
+      - in: "path"
         name: "hubId"
         description: "Hub id"
         required: true
         type: "string"
       responses:
         200:
-          description: "Successful operation"
-          type: "array"
-          items:
-            $ref: "#/definitions/Sensor"
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Sensor"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
           description: "Hub not found"
-  hubs/{hubId}/sensors/{id}:
+  /users/{userId}/hubs/{hubId}/sensors/{id}:
     get:
       tags:
       - "sensor"
@@ -88,6 +99,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "path"
         name: "id"
         description: "Sensor id"
@@ -102,7 +118,9 @@ paths:
         200:
           description: "Successful operation"
           schema:
-            $ref: "#/definitions/Sensor"
+            type: "array"
+            items:
+              $ref: "#/definitions/Sensor"
         400:
           description: "Invalid ID supplied"
         403:
@@ -120,6 +138,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "body"
         name: "body"
         description: "sensor object that needs to be updated"
@@ -158,6 +181,11 @@ paths:
       - "application/json"
       parameters:
       - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
+      - in: "path"
         name: "id"
         type: "string"
         required: true
@@ -175,7 +203,7 @@ paths:
           description: "Forbidden"
         404:
           description: "Sensor not found"
-  hubs/{hubId}/sensors/{sensorId}/readings:
+  /users/{userId}/hubs/{hubId}/sensors/{sensorId}/readings:
     post:
       tags:
       - "sensorReading"
@@ -187,6 +215,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "path"
         name: "sensorId"
         type: "string"
@@ -219,6 +252,11 @@ paths:
       - "application/json"
       parameters:
       - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
+      - in: "path"
         name: "sensorId"
         type: "string"
         required: true
@@ -231,14 +269,16 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/SensorReading"
+            type: "array"
+            items:
+              $ref: "#/definitions/SensorReading"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
           description: "Sensor readings not found"
-  hubs/{hubId}/sensors/{sensorId}/readings/{id}:
+  /users/{userId}/hubs/{hubId}/sensors/{sensorId}/readings/{id}:
     get:
       tags:
       - "sensorReading"
@@ -250,6 +290,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "path"
         name: "id"
         type: "string"
@@ -287,6 +332,11 @@ paths:
       - "application/json"
       parameters:
       - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
+      - in: "path"
         name: "id"
         type: "string"
         required: true
@@ -323,6 +373,11 @@ paths:
       - "application/json"
       parameters:
       - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
+      - in: "path"
         name: "id"
         type: "string"
         required: true
@@ -345,7 +400,7 @@ paths:
           description: "Forbidden"
         404:
           description: "Sensor reading not found"
-  hubs/{hubId}/controlCodes:
+  /users/{userId}/hubs/{hubId}/controlCodes:
     post:
       tags:
       - "controlCode"
@@ -357,6 +412,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "body"
         name: "body"
         description: "controlCode object that needs to be added"
@@ -382,6 +442,11 @@ paths:
       - "application/json"
       parameters:
       - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
+      - in: "path"
         name: "hubId"
         description: "Hub id"
         required: true
@@ -390,22 +455,29 @@ paths:
         200:
           description: "Successful operation"
           schema:
-            $ref: "#/definitions/ControlCode"
+            type: "array"
+            items:
+              $ref: "#/definitions/ControlCode"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
           description: "controlCode not found"
-  hubs/{hubId}/controlCodes/{id}:
+  /users/{userId}/hubs/{hubId}/controlCodes/{id}:
     get:
       tags:
       - "controlCode"
-      summary: "Finds controlCodes by id"
+      summary: "Finds controlCode by id"
       operationId: "findControlCodesById"
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "path"
         name: "id"
         description: "ControlCode id"
@@ -438,6 +510,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "body"
         name: "body"
         description: "controlCode object that needs to be updated"
@@ -476,6 +553,11 @@ paths:
       - "application/json"
       parameters:
       - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
+      - in: "path"
         name: "id"
         type: "string"
         required: true
@@ -493,7 +575,7 @@ paths:
           description: "Forbidden"
         404:
           description: "ControlCode not found"
-  hubs/{hubId}/controlCodes/{controlCodeId}/controlCommands:
+  /users/{userId}/hubs/{hubId}/controlCodes/{controlCodeId}/controlCommands:
     post:
       tags:
       - "controlCommand"
@@ -505,6 +587,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "path"
         name: "controlCodeId"
         type: "string"
@@ -537,6 +624,11 @@ paths:
       - "application/json"
       parameters:
       - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
+      - in: "path"
         name: "controlCodeId"
         type: "string"
         required: true
@@ -549,14 +641,16 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/ControlCommand"
+            type: "array"
+            items:
+              $ref: "#/definitions/ControlCommand"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
           description: "Control code controlCommand not found"
-  hubs/{hubId}/controlCodes/{controlCodeId}/controlCommands/{id}:
+  /users/{userId}/hubs/{hubId}/controlCodes/{controlCodeId}/controlCommands/{id}:
     get:
       tags:
       - "controlCommand"
@@ -568,6 +662,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "path"
         name: "id"
         type: "string"
@@ -605,6 +704,11 @@ paths:
       - "application/json"
       parameters:
       - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
+      - in: "path"
         name: "id"
         type: "string"
         required: true
@@ -640,6 +744,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "path"
         name: "id"
         type: "string"
@@ -733,18 +842,18 @@ paths:
       responses:
         default:
           description: "successful operation"
-  /users/{email}:
+  /users/{id}:
     get:
       tags:
       - "user"
-      summary: "Get user by email"
+      summary: "Get user by id"
       description: ""
       operationId: "getUserByName"
       produces:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "email"
+      - name: "id"
         in: "path"
         description: "The name that needs to be fetched. Use user1 for testing. "
         required: true
@@ -755,7 +864,7 @@ paths:
           schema:
             $ref: "#/definitions/User"
         400:
-          description: "Invalid email supplied"
+          description: "Invalid id supplied"
         404:
           description: "User not found"
     put:
@@ -768,7 +877,7 @@ paths:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "email"
+      - name: "id"
         in: "path"
         description: "name that need to be updated"
         required: true
@@ -794,17 +903,17 @@ paths:
       - "application/xml"
       - "application/json"
       parameters:
-      - name: "email"
+      - name: "id"
         in: "path"
         description: "The name that needs to be deleted"
         required: true
         type: "string"
       responses:
         400:
-          description: "Invalid email supplied"
+          description: "Invalid id supplied"
         404:
           description: "User not found"
-  /hubs:
+  /users/{userId}/hubs:
     post:
       tags:
       - "hub"
@@ -816,6 +925,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "body"
         name: "body"
         description: "Hub object that needs to be added"
@@ -830,28 +944,30 @@ paths:
     get:
       tags:
       - "hub"
-      summary: "Finds Hubs"
-      operationId: "findHubs"
+      summary: "Finds Hubs by user id"
+      operationId: "findHubsByUserId"
       produces:
       - "application/json"
       parameters:
       - in: "path"
-        name: "id"
-        description: "Hub id"
-        required: true
+        name: "userId"
         type: "string"
+        required: true
+        description: "User id"
       responses:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Hub"
+            type: "array"
+            items:
+              $ref: "#/definitions/Hub"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
           description: "Hub not found"
-  /hubs/{id}:
+  /users/{userId}/hubs/{id}:
     get:
       tags:
       - "hub"
@@ -860,6 +976,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "path"
         name: "id"
         description: "Hub id"
@@ -887,6 +1008,11 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
       - in: "body"
         name: "body"
         description: "Hub object that needs to be updated"
@@ -920,6 +1046,11 @@ paths:
       - "application/json"
       parameters:
       - in: "path"
+        name: "userId"
+        type: "string"
+        required: true
+        description: "User id"
+      - in: "path"
         name: "id"
         type: "string"
         required: true
@@ -943,12 +1074,14 @@ definitions:
     properties:
       id:
         type: "string"
-      username:
-        type: "string"
       email:
         type: "string"
       hashed_password:
         type: "string"
+      hubs:
+        type: "array"
+        items:
+            $ref: "#/definitions/Hub"
   Hub:
     type: "object"
     required:
@@ -967,8 +1100,14 @@ definitions:
       createdAt:
         type: "string"
         format: "date-time"
-      userId:
-        type: "string"
+      sensors:
+        type: "array"
+        items:
+            $ref: "#/definitions/Sensor"
+      controlCodes:
+        type: "array"
+        items:
+            $ref: "#/definitions/ControlCode"
   Sensor:
     type: "object"
     properties:
@@ -987,8 +1126,10 @@ definitions:
       createdAt:
         type: "string"
         format: "date-time"
-      hubId:
-        type: "string"
+      sensorReadings:
+        type: "array"
+        items:
+            $ref: "#/definitions/SensorReading"
   SensorReading:
     type: "object"
     properties:
@@ -1015,8 +1156,10 @@ definitions:
         type: "array"
         items:
           type: "string"
-      hubId:
-        type: "string"
+      controlCommands:
+        type: "array"
+        items:
+            $ref: "#/definitions/ControlCommand"
   ControlCommand:
     type: "object"
     properties:
