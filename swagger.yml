@@ -9,7 +9,7 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "209.177.93.243"
+host: "localhost:8080"
 basePath: "/api"
 tags:
 - name: "hub"
@@ -45,7 +45,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "sensor object that needs to be added"
+        description: "{"type": "humidity","location": [1.1,1.1]}"
         required: true
         schema:
           $ref: "#/definitions/Sensor"
@@ -145,7 +145,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "sensor object that needs to be updated"
+        description: "{"type": "humidity","location": [1.1,1.1]}"
         required: true
         schema:
           $ref: "#/definitions/Sensor"
@@ -229,6 +229,12 @@ paths:
         description: "Hub id"
         required: true
         type: "string"
+      - in: "body"
+        name: "body"
+        description: "{"action": "readHumidity","data": .1}"
+        required: true
+        schema:
+          $ref: "#/definitions/SensorReading"
       responses:
         200:
           description: "successful operation"
@@ -350,6 +356,12 @@ paths:
         description: "Sensor id"
         required: true
         type: "string"
+      - in: "body"
+        name: "body"
+        description: "{"action": "readHumidity","data": .1}"
+        required: true
+        schema:
+          $ref: "#/definitions/SensorReading"
       responses:
         200:
           description: "successful operation"
@@ -419,7 +431,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "controlCode object that needs to be added"
+        description: "{"version": "1.0.0", "commands":[]}"
         required: true
         schema:
           $ref: "#/definitions/ControlCode"
@@ -517,7 +529,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "controlCode object that needs to be updated"
+        description: "{"version": "1.0.0", "commands":[]}"
         required: true
         schema:
           $ref: "#/definitions/ControlCode"
@@ -601,6 +613,12 @@ paths:
         description: "Hub id"
         required: true
         type: "string"
+      - in: "body"
+        name: "body"
+        description: "{"action": "setHumidity", "data": .2}"
+        required: true
+        schema:
+          $ref: "#/definitions/ControlCommand"
       responses:
         200:
           description: "successful operation"
@@ -722,6 +740,12 @@ paths:
         description: "Control code id"
         required: true
         type: "string"
+      - in: "body"
+        name: "body"
+        description: "{"action": "setHumidity", "data": .2}"
+        required: true
+        schema:
+          $ref: "#/definitions/ControlCommand"
       responses:
         200:
           description: "successful operation"
@@ -784,7 +808,7 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "Created user object"
+        description: "{"username": "benjithedalilama", "email": "benjithedalillama@gmail.com", "password": "doodoobrain"}"
         required: true
         schema:
           $ref: "#/definitions/User"
@@ -884,7 +908,7 @@ paths:
         type: "string"
       - in: "body"
         name: "body"
-        description: "Updated user object"
+        description: "{"username": "benjithedalilama", "email": "benjithedalillama@gmail.com", "password": "doodoobrain"}"
         required: true
         schema:
           $ref: "#/definitions/User"
@@ -932,7 +956,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "Hub object that needs to be added"
+        description: "{"name": "Berlin-2","location": [1.0,1.0]}"
         required: true
         schema:
           $ref: "#/definitions/Hub"
@@ -1015,7 +1039,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "Hub object that needs to be updated"
+        description: "{"name": "Berlin-2","location": [1.0,1.0]}"
         required: true
         schema:
           $ref: "#/definitions/Hub"
