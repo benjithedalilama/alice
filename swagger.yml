@@ -231,7 +231,7 @@ paths:
         type: "string"
       - in: "body"
         name: "body"
-        description: "{'action': "readHumidity",'data': .1}"
+        description: "{'action': 'readHumidity','data': 0.1}"
         required: true
         schema:
           $ref: "#/definitions/SensorReading"
@@ -358,7 +358,7 @@ paths:
         type: "string"
       - in: "body"
         name: "body"
-        description: "{'action': "readHumidity",'data': .1}"
+        description: "{'action': 'readHumidity','data': 0.1}"
         required: true
         schema:
           $ref: "#/definitions/SensorReading"
@@ -615,7 +615,7 @@ paths:
         type: "string"
       - in: "body"
         name: "body"
-        description: "{'action': "setHumidity", 'data': .2}"
+        description: "{'action': 'setHumidity', 'data': 0.2}"
         required: true
         schema:
           $ref: "#/definitions/ControlCommand"
@@ -742,7 +742,7 @@ paths:
         type: "string"
       - in: "body"
         name: "body"
-        description: "{'action': "setHumidity", 'data': .2}"
+        description: "{'action': 'setHumidity', 'data': 0.2}"
         required: true
         schema:
           $ref: "#/definitions/ControlCommand"
