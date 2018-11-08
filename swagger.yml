@@ -45,7 +45,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "{"type": "humidity","location": [1.1,1.1]}"
+        description: "{'type': 'humidity','location': [1.1,1.1]}"
         required: true
         schema:
           $ref: "#/definitions/Sensor"
@@ -145,7 +145,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "{"type": "humidity","location": [1.1,1.1]}"
+        description: "{'type': 'humidity','location': [1.1,1.1]}"
         required: true
         schema:
           $ref: "#/definitions/Sensor"
@@ -231,7 +231,7 @@ paths:
         type: "string"
       - in: "body"
         name: "body"
-        description: "{"action": "readHumidity","data": .1}"
+        description: "{'action': "readHumidity",'data': .1}"
         required: true
         schema:
           $ref: "#/definitions/SensorReading"
@@ -358,7 +358,7 @@ paths:
         type: "string"
       - in: "body"
         name: "body"
-        description: "{"action": "readHumidity","data": .1}"
+        description: "{'action': "readHumidity",'data': .1}"
         required: true
         schema:
           $ref: "#/definitions/SensorReading"
@@ -431,7 +431,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "{"version": "1.0.0", "commands":[]}"
+        description: "{'version': '1.0.0', 'commands':[]}"
         required: true
         schema:
           $ref: "#/definitions/ControlCode"
@@ -529,7 +529,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "{"version": "1.0.0", "commands":[]}"
+        description: "{'version': '1.0.0', 'commands':[]}"
         required: true
         schema:
           $ref: "#/definitions/ControlCode"
@@ -615,7 +615,7 @@ paths:
         type: "string"
       - in: "body"
         name: "body"
-        description: "{"action": "setHumidity", "data": .2}"
+        description: "{'action': "setHumidity", 'data': .2}"
         required: true
         schema:
           $ref: "#/definitions/ControlCommand"
@@ -742,7 +742,7 @@ paths:
         type: "string"
       - in: "body"
         name: "body"
-        description: "{"action": "setHumidity", "data": .2}"
+        description: "{'action': "setHumidity", 'data': .2}"
         required: true
         schema:
           $ref: "#/definitions/ControlCommand"
@@ -808,7 +808,7 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "{"username": "benjithedalilama", "email": "benjithedalillama@gmail.com", "password": "doodoobrain"}"
+        description: "{'username': 'benjithedalilama', 'email': 'benjithedalillama@gmail.com', 'password': 'doodoobrain'}"
         required: true
         schema:
           $ref: "#/definitions/User"
@@ -908,7 +908,7 @@ paths:
         type: "string"
       - in: "body"
         name: "body"
-        description: "{"username": "benjithedalilama", "email": "benjithedalillama@gmail.com", "password": "doodoobrain"}"
+        description: "{'username': 'benjithedalilama', 'email': 'benjithedalillama@gmail.com', 'password': 'doodoobrain'}"
         required: true
         schema:
           $ref: "#/definitions/User"
@@ -956,7 +956,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "{"name": "Berlin-2","location": [1.0,1.0]}"
+        description: "{'name': 'Berlin-2','location': [1.0,1.0]}"
         required: true
         schema:
           $ref: "#/definitions/Hub"
@@ -1039,7 +1039,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "{"name": "Berlin-2","location": [1.0,1.0]}"
+        description: "{'name': 'Berlin-2','location': [1.0,1.0]}"
         required: true
         schema:
           $ref: "#/definitions/Hub"
