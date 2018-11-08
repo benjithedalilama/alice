@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+import User from './models/User'
 
 const mongoDB = 'mongodb://root:example@mongo:27017'
 
@@ -11,7 +12,6 @@ const connectWithRetry = () => {
   return mongoose.connect(mongoDB)
 }
 
-// Exit application on error
 db.on('error', err => {
   console.log(`MongoDB connection error: ${err}`)
   setTimeout(connectWithRetry, 5000)
@@ -26,3 +26,16 @@ const connect = () => {
 }
 
 connect()
+
+const createUser = () => {
+  const user = new User(req.body)
+  user.save( (err) => {
+    if (err) return next(err)
+    res.send(user)
+  })
+}
+
+export default {
+  db,
+  createUser
+}

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import Hub from './Hub'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 const Schema = mongoose.Schema
 
