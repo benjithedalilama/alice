@@ -27,15 +27,4 @@ const connect = () => {
 
 connect()
 
-const createUser = () => {
-  const user = new User(req.body)
-  user.save( (err) => {
-    if (err) return err
-    return user
-  })
-}
-
-export default {
-  db,
-  createUser
-}
+export default db
