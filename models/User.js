@@ -23,28 +23,30 @@ const UserSchema = new Schema({
     hubs: [Hub.schema]
 })
 
-UserSchema.pre("save", (next) => {
+UserSchema.pre('save', function(next) {
     const user = this
-    if (user._password === undefined) {
-        return next()
-    }
+
+    if (!user.isModified('password')) return next()
+
     bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-        if (err) console.log(err)
-        bcrypt.hash(user._password, salt, (err, hash) => {
-            if (err) console.log(err)
-            user.hashed_password = hash
+        if (err) return next(err)
+
+        // hash the password using our new salt
+        bcrypt.hash(user.password, salt, (err, hash) => {
+            if (err) return next(err)
+
+            // override the cleartext password with the hashed one
+            user.password = hash
             next()
         })
     })
 })
 
-UserSchema.methods = {
-    comparePassword: (candidatePassword, cb) => {
-        bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-            if (err) return cb(err)
-            cb(null, isMatch)
-        })
-    }
+UserSchema.methods.comparePassword = (candidatePassword, cb) => {
+    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+        if (err) return cb(err)
+        cb(null, isMatch)
+    })
 }
 
 const User = mongoose.model('User', UserSchema)

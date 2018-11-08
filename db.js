@@ -30,8 +30,8 @@ connect()
 const createUser = () => {
   const user = new User(req.body)
   user.save( (err) => {
-    if (err) return next(err)
-    res.send(user)
+    if (err) return err
+    return user
   })
 }
 
