@@ -45,7 +45,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "{'type': 'humidity','location': [1.1,1.1]}"
+        description: "{'type': 'humidity'}"
         required: true
         schema:
           $ref: "#/definitions/Sensor"
@@ -145,7 +145,7 @@ paths:
         description: "User id"
       - in: "body"
         name: "body"
-        description: "{'type': 'humidity','location': [1.1,1.1]}"
+        description: "{'type': 'humidity'}"
         required: true
         schema:
           $ref: "#/definitions/Sensor"
@@ -1143,10 +1143,6 @@ definitions:
         - "humidity"
         - "temperature"
         - "ammonia"
-      location:
-        type: "array"
-        items:
-          type: "number"
       createdAt:
         type: "string"
         format: "date-time"

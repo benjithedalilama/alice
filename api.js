@@ -11,6 +11,7 @@ import ControlCommand from './models/ControlCommand'
 
 import UserService from './services/UserService'
 import HubService from './services/HubService'
+import SensorService from './services/SensorService'
 
 const PORT = 8080
 const HOST = '0.0.0.0'
@@ -133,86 +134,58 @@ app.delete(base_path + '/users/:userId/hubs/:id', async (req, res, next) => {
 })
 
 // Create new sensor
-app.post(base_path + '/users/:userId/hubs/:hubId/sensors', (req, res, next) => {
-  User.findById( req.params.userId, (err, user) => {
-    if (err) return next(err)
-    if (!user) return next({status: 404, message: "User not found"})
-
-    const hub = user.hubs.id(req.params.hubId)
-    if (!hub) return next({status: 404, message: "Hub not found"})
-
-    const sensor = new Sensor(req.body)
-    hub.sensors.push(sensor)
-    user.save( (err) => {
-      if (err) return next(err)
-      res.send(sensor)
-    })
-  })
+app.post(base_path + '/users/:userId/hubs/:hubId/sensors', async (req, res, next) => {
+  try {
+    const sensor = await SensorService.create(req)
+    res.send(sensor)
+  }
+  catch (err) {
+    next(err)
+  }
 })
 
 // Get all sensors by hub
-app.get(base_path + '/users/:userId/hubs/:hubId/sensors', (req, res, next) => {
-  User.findById( req.params.userId, (err, user) => {
-    if (err) return next(err)
-    if (!user) return next({status: 404, message: "User not found"})
-
-    const hub = user.hubs.id(req.params.hubId)
-    if (!hub) return next({status: 404, message: "Hub not found"})
-    res.send(hub.sensors)
-  })
+app.get(base_path + '/users/:userId/hubs/:hubId/sensors', async (req, res, next) => {
+  try {
+    const sensors = await SensorService.getAll(req)
+    res.send(sensors)
+  }
+  catch (err) {
+    next(err)
+  }
 })
 
 // Get sensor by id
-app.get(base_path + '/users/:userId/hubs/:hubId/sensors/:id', (req, res, next) => {
-  User.findById( req.params.userId, (err, user) => {
-    if (err) return next(err)
-    if (!user) return next({status: 404, message: "User not found"})
-
-    const hub = user.hubs.id(req.params.hubId)
-    if (!hub) return next({status: 404, message: "Hub not found"})
-
-    const sensor = hub.sensors.id(req.params.id)
-    if (!sensor) return next({status: 404, message: "Sensor not found"})
+app.get(base_path + '/users/:userId/hubs/:hubId/sensors/:id', async (req, res, next) => {
+  try {
+    const sensor = await SensorService.get(req)
     res.send(sensor)
-  })
+  }
+  catch (err) {
+    next(err)
+  }
 })
 
 // Update sensor by id
-app.put(base_path + '/users/:userId/hubs/:hubId/sensors/:id', (req, res, next) => {
-  User.findById( req.params.userId, (err, user) => {
-    if (err) return next(err)
-    if (!user) return next({status: 404, message: "User not found"})
-
-    const hub = user.hubs.id(req.params.hubId)
-    if (!hub) return next({status: 404, message: "Hub not found"})
-
-    const sensor = hub.sensors.id(req.params.id)
-    if (!sensor) return next({status: 404, message: "Sensor not found"})
-    sensor.set(req.body)
-    user.save((err) => {
-      if (err) return next(err)
-      res.send(sensor)
-    })
-  })
+app.put(base_path + '/users/:userId/hubs/:hubId/sensors/:id', async (req, res, next) => {
+  try {
+    const sensor = await SensorService.update(req)
+    res.send(sensor)
+  }
+  catch (err) {
+    next(err)
+  }
 })
 
 // Delete sensor by id
-app.delete(base_path + '/users/:userId/hubs/:hubId/sensors/:id', (req, res, next) => {
-  User.findById( req.params.userId, (err, user) => {
-    if (err) return next(err)
-    if (!user) return next({status: 404, message: "User not found"})
-
-    const hub = user.hubs.id(req.params.hubId)
-    if (!hub) return next({status: 404, message: "Hub not found"})
-
-    const sensor = hub.sensors.id(req.params.id)
-    if (!sensor) return next({status: 404, message: "Sensor not found"})
-    sensor.remove()
-    user.save((err) => {
-      if (err) return next(err)
-      res.status(204).send({})
-    })
-  })
+app.delete(base_path + '/users/:userId/hubs/:hubId/sensors/:id', async (req, res, next) => {
+  try {
+    await SensorService.delete(req)
+    res.status(204).send({})
+  }
+  catch (err) {
+    next(err)
+  }
 })
 
 app.use( (err, req, res, next) => {
