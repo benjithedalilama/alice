@@ -6,7 +6,6 @@ const Schema = mongoose.Schema
 const ControlCodeSchema = new Schema({
     id: mongoose.Types.ObjectId,
     version: String,
-    commands: [String],
     controlCommands: [ControlCommand.schema]
 })
 

@@ -13,6 +13,7 @@ import UserService from './services/UserService'
 import HubService from './services/HubService'
 import SensorService from './services/SensorService'
 import SensorReadingService from './services/SensorReadingService'
+import ControlCodeService from './services/ControlCodeService'
 
 const PORT = 8080
 const HOST = '0.0.0.0'
@@ -237,6 +238,61 @@ app.put(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id',
 app.delete(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id', async (req, res, next) => {
   try {
     await SensorReadingService.delete(req)
+    res.status(204).send({})
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Create controlCew code
+app.post(base_path + '/users/:userId/hubs/:hubId/codes', async (req, res, next) => {
+  try {
+    const code = await ControlCodeService.create(req)
+    res.send(code)
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Get all controlCodes by hub
+app.get(base_path + '/users/:userId/hubs/:hubId/codes', async (req, res, next) => {
+  try {
+    const codes = await ControlCodeService.getAll(req)
+    res.send(codes)
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Get controlCode by id
+app.get(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, next) => {
+  try {
+    const code = await ControlCodeService.get(req)
+    res.send(code)
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Update controlCode by id
+app.put(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, next) => {
+  try {
+    const code = await ControlCodeService.update(req)
+    res.send(code)
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Delete controlCode by id
+app.delete(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, next) => {
+  try {
+    await ControlCodeService.delete(req)
     res.status(204).send({})
   }
   catch (err) {

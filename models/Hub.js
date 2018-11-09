@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import Sensor from './Sensor'
+import ControlCode from './ControlCode'
 
 const Schema = mongoose.Schema
 
@@ -8,7 +9,8 @@ const HubSchema = new Schema({
     name: String,
     location: [Number, Number],
     createdAt: Date,
-    sensors: [Sensor.schema]
+    sensors: [Sensor.schema],
+    controlCodes: [ControlCode.schema]
 })
 
 const Hub = mongoose.model('Hub', HubSchema)
