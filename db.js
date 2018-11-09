@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
+import {} from 'dotenv/config'
 import User from './models/User'
 
-const mongoDB = 'mongodb://root:example@mongo:27017'
+const connectionUrl = process.env.MONGO_LOCAL_CONN_URL
 
 mongoose.Promise = global.Promise
 const db = mongoose.connection
@@ -9,7 +10,7 @@ const db = mongoose.connection
 // Retry connection
 const connectWithRetry = () => {
   console.log('MongoDB connection with retry')
-  return mongoose.connect(mongoDB)
+  return mongoose.connect(connectionUrl)
 }
 
 db.on('error', err => {

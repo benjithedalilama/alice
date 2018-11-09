@@ -29,7 +29,7 @@ app.use(bodyParser.json())
 app.post(base_path + '/users', async (req, res, next) => {
   try {
     const user = await UserService.create(req)
-    res.send(user)
+    res.send({user: user})
   }
   catch (err) {
     next(err)
@@ -40,8 +40,29 @@ app.post(base_path + '/users', async (req, res, next) => {
 app.get(base_path + '/users/:id', async (req, res, next) => {
   try {
     const user = await UserService.get(req)
-    if (!user) return next({status: 404, message: "User not found"})
-    res.send(user)
+    res.send({user: user})
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Login user
+app.post(base_path + '/users/login', async (req, res, next) => {
+  try {
+    const result = await UserService.login(req)
+    res.send(result)
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Logout user
+app.get(base_path + '/users/:username', async (req, res, next) => {
+  try {
+    const user = await UserService.get(req)
+    res.send({user: user})
   }
   catch (err) {
     next(err)
@@ -52,7 +73,7 @@ app.get(base_path + '/users/:id', async (req, res, next) => {
 app.get(base_path + '/users', async (req, res, next) => {
   try {
     const users = await UserService.getAll()
-    res.send(users)
+    res.send({users: users})
   }
   catch (err) {
     next(err)
@@ -63,7 +84,7 @@ app.get(base_path + '/users', async (req, res, next) => {
 app.put(base_path + '/users/:id', async (req, res, next) => {
   try {
     const user = await UserService.update(req)
-    res.send(user)
+    res.send({user: user})
   }
   catch (err) {
     next(err)
@@ -85,7 +106,7 @@ app.delete(base_path + '/users/:id', async (req, res, next) => {
 app.post(base_path + '/users/:userId/hubs', async (req, res, next) => {
   try {
     const hub = await HubService.create(req)
-    res.send(hub)
+    res.send({hub: hub})
   }
   catch (err) {
     next(err)
@@ -96,7 +117,7 @@ app.post(base_path + '/users/:userId/hubs', async (req, res, next) => {
 app.get(base_path + '/users/:userId/hubs', async (req, res, next) => {
   try {
     const hubs = await HubService.getAll(req)
-    res.send(hubs)
+    res.send({hubs: hubs})
   }
   catch (err) {
     next(err)
@@ -107,7 +128,7 @@ app.get(base_path + '/users/:userId/hubs', async (req, res, next) => {
 app.get(base_path + '/users/:userId/hubs/:id', async (req, res, next) => {
   try {
     const hub = await HubService.get(req)
-    res.send(hub)
+    res.send({hub: hub})
   }
   catch (err) {
     next(err)
@@ -118,7 +139,7 @@ app.get(base_path + '/users/:userId/hubs/:id', async (req, res, next) => {
 app.put(base_path + '/users/:userId/hubs/:id', async (req, res, next) => {
   try {
     const hub = await HubService.update(req)
-    res.send(hub)
+    res.send({hub: hub})
   }
   catch (err) {
     next(err)
@@ -140,7 +161,7 @@ app.delete(base_path + '/users/:userId/hubs/:id', async (req, res, next) => {
 app.post(base_path + '/users/:userId/hubs/:hubId/sensors', async (req, res, next) => {
   try {
     const sensor = await SensorService.create(req)
-    res.send(sensor)
+    res.send({sensor: sensor})
   }
   catch (err) {
     next(err)
@@ -151,7 +172,7 @@ app.post(base_path + '/users/:userId/hubs/:hubId/sensors', async (req, res, next
 app.get(base_path + '/users/:userId/hubs/:hubId/sensors', async (req, res, next) => {
   try {
     const sensors = await SensorService.getAll(req)
-    res.send(sensors)
+    res.send({sensors: sensors})
   }
   catch (err) {
     next(err)
@@ -162,7 +183,7 @@ app.get(base_path + '/users/:userId/hubs/:hubId/sensors', async (req, res, next)
 app.get(base_path + '/users/:userId/hubs/:hubId/sensors/:id', async (req, res, next) => {
   try {
     const sensor = await SensorService.get(req)
-    res.send(sensor)
+    res.send({sensor: sensor})
   }
   catch (err) {
     next(err)
@@ -173,7 +194,7 @@ app.get(base_path + '/users/:userId/hubs/:hubId/sensors/:id', async (req, res, n
 app.put(base_path + '/users/:userId/hubs/:hubId/sensors/:id', async (req, res, next) => {
   try {
     const sensor = await SensorService.update(req)
-    res.send(sensor)
+    res.send({sensor: sensor})
   }
   catch (err) {
     next(err)
@@ -195,7 +216,7 @@ app.delete(base_path + '/users/:userId/hubs/:hubId/sensors/:id', async (req, res
 app.post(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings', async (req, res, next) => {
   try {
     const sensorReading = await SensorReadingService.create(req)
-    res.send(sensorReading)
+    res.send({sensorReading: sensorReading})
   }
   catch (err) {
     next(err)
@@ -206,7 +227,7 @@ app.post(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings', as
 app.get(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings', async (req, res, next) => {
   try {
     const sensorReadings = await SensorReadingService.getAll(req)
-    res.send(sensorReadings)
+    res.send({sensorReadings: sensorReadings})
   }
   catch (err) {
     next(err)
@@ -217,7 +238,7 @@ app.get(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings', asy
 app.get(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id', async (req, res, next) => {
   try {
     const sensorReading = await SensorReadingService.get(req)
-    res.send(sensorReading)
+    res.send({sensorReading: sensorReading})
   }
   catch (err) {
     next(err)
@@ -228,7 +249,7 @@ app.get(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id',
 app.put(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id', async (req, res, next) => {
   try {
     const sensorReading = await SensorReadingService.update(req)
-    res.send(sensorReading)
+    res.send({sensorReading: sensorReading})
   }
   catch (err) {
     next(err)
@@ -250,7 +271,7 @@ app.delete(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:i
 app.post(base_path + '/users/:userId/hubs/:hubId/codes', async (req, res, next) => {
   try {
     const controlCode = await ControlCodeService.create(req)
-    res.send(controlCode)
+    res.send({controlCode: controlCode})
   }
   catch (err) {
     next(err)
@@ -261,7 +282,7 @@ app.post(base_path + '/users/:userId/hubs/:hubId/codes', async (req, res, next) 
 app.get(base_path + '/users/:userId/hubs/:hubId/codes', async (req, res, next) => {
   try {
     const controlCodes = await ControlCodeService.getAll(req)
-    res.send(controlCodes)
+    res.send({controlCodes: controlCodes})
   }
   catch (err) {
     next(err)
@@ -272,7 +293,7 @@ app.get(base_path + '/users/:userId/hubs/:hubId/codes', async (req, res, next) =
 app.get(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, next) => {
   try {
     const controlCode = await ControlCodeService.get(req)
-    res.send(controlCode)
+    res.send({controlCode: controlCode})
   }
   catch (err) {
     next(err)
@@ -283,7 +304,7 @@ app.get(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, nex
 app.put(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, next) => {
   try {
     const controlCode = await ControlCodeService.update(req)
-    res.send(controlCode)
+    res.send({controlCode: controlCode})
   }
   catch (err) {
     next(err)
@@ -305,7 +326,7 @@ app.delete(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, 
 app.post(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands', async (req, res, next) => {
   try {
     const controlCommand = await ControlCommandService.create(req)
-    res.send(controlCommand)
+    res.send({controlCommand: controlCommand})
   }
   catch (err) {
     next(err)
@@ -316,7 +337,7 @@ app.post(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands',
 app.get(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands', async (req, res, next) => {
   try {
     const controlCommands = await ControlCommandService.getAll(req)
-    res.send(controlCommands)
+    res.send({controlCommands: controlCommands})
   }
   catch (err) {
     next(err)
@@ -327,7 +348,7 @@ app.get(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands', 
 app.get(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands/:id', async (req, res, next) => {
   try {
     const controlCommand = await ControlCommandService.get(req)
-    res.send(controlCommand)
+    res.send({controlCommand: controlCommand})
   }
   catch (err) {
     next(err)
@@ -338,7 +359,7 @@ app.get(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands/:i
 app.put(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands/:id', async (req, res, next) => {
   try {
     const controlCommand = await ControlCommandService.update(req)
-    res.send(controlCommand)
+    res.send({controlCommand: controlCommand})
   }
   catch (err) {
     next(err)
