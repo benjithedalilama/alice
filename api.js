@@ -14,6 +14,7 @@ import HubService from './services/HubService'
 import SensorService from './services/SensorService'
 import SensorReadingService from './services/SensorReadingService'
 import ControlCodeService from './services/ControlCodeService'
+import ControlCommandService from './services/ControlCommandService'
 
 const PORT = 8080
 const HOST = '0.0.0.0'
@@ -245,11 +246,11 @@ app.delete(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:i
   }
 })
 
-// Create controlCew code
+// Create new controlCode
 app.post(base_path + '/users/:userId/hubs/:hubId/codes', async (req, res, next) => {
   try {
-    const code = await ControlCodeService.create(req)
-    res.send(code)
+    const controlCode = await ControlCodeService.create(req)
+    res.send(controlCode)
   }
   catch (err) {
     next(err)
@@ -259,8 +260,8 @@ app.post(base_path + '/users/:userId/hubs/:hubId/codes', async (req, res, next) 
 // Get all controlCodes by hub
 app.get(base_path + '/users/:userId/hubs/:hubId/codes', async (req, res, next) => {
   try {
-    const codes = await ControlCodeService.getAll(req)
-    res.send(codes)
+    const controlCodes = await ControlCodeService.getAll(req)
+    res.send(controlCodes)
   }
   catch (err) {
     next(err)
@@ -270,8 +271,8 @@ app.get(base_path + '/users/:userId/hubs/:hubId/codes', async (req, res, next) =
 // Get controlCode by id
 app.get(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, next) => {
   try {
-    const code = await ControlCodeService.get(req)
-    res.send(code)
+    const controlCode = await ControlCodeService.get(req)
+    res.send(controlCode)
   }
   catch (err) {
     next(err)
@@ -281,8 +282,8 @@ app.get(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, nex
 // Update controlCode by id
 app.put(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, next) => {
   try {
-    const code = await ControlCodeService.update(req)
-    res.send(code)
+    const controlCode = await ControlCodeService.update(req)
+    res.send(controlCode)
   }
   catch (err) {
     next(err)
@@ -293,6 +294,61 @@ app.put(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, nex
 app.delete(base_path + '/users/:userId/hubs/:hubId/codes/:id', async (req, res, next) => {
   try {
     await ControlCodeService.delete(req)
+    res.status(204).send({})
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Create new controlCommand
+app.post(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands', async (req, res, next) => {
+  try {
+    const controlCommand = await ControlCommandService.create(req)
+    res.send(controlCommand)
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Get all controlCommands by hub
+app.get(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands', async (req, res, next) => {
+  try {
+    const controlCommands = await ControlCommandService.getAll(req)
+    res.send(controlCommands)
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Get controlCommand by id
+app.get(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands/:id', async (req, res, next) => {
+  try {
+    const controlCommand = await ControlCommandService.get(req)
+    res.send(controlCommand)
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Update controlCommand by id
+app.put(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands/:id', async (req, res, next) => {
+  try {
+    const controlCommand = await ControlCommandService.update(req)
+    res.send(controlCommand)
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Delete controlCommand by id
+app.delete(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands/:id', async (req, res, next) => {
+  try {
+    await ControlCommandService.delete(req)
     res.status(204).send({})
   }
   catch (err) {
