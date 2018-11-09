@@ -45,6 +45,7 @@ class HubService {
     if (!user) throw {status: 404, message: "User not found"}
 
     const hub = user.hubs.id(req.params.id)
+    if (!hub) throw {status: 404, message: "Hub not found"}
     hub.remove()
 
     return user.save()
