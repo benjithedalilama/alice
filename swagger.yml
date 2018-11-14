@@ -1121,6 +1121,8 @@ definitions:
         type: "array"
         items:
           type: "number"
+      deployed:
+        type: "boolean"
       createdAt:
         type: "string"
         format: "date-time"
@@ -1172,10 +1174,11 @@ definitions:
         type: "string"
       version:
         type: "string"
-      commands:
-        type: "array"
-        items:
-          type: "string"
+      action:
+        type: "string"
+        enum:
+        - "setHumidity"
+        - "setTemperature"
       controlCommands:
         type: "array"
         items:

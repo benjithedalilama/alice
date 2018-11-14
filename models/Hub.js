@@ -8,6 +8,7 @@ const HubSchema = new Schema({
     id: mongoose.Types.ObjectId,
     name: String,
     location: [Number, Number],
+    deployed: Boolean,
     createdAt: Date,
     sensors: [Sensor.schema],
     controlCodes: [ControlCode.schema]
