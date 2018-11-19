@@ -9,8 +9,8 @@ import Sensor from './models/Sensor'
 import SensorReading from './models/SensorReading'
 import ControlCode from './models/ControlCode'
 import ControlCommand from './models/ControlCommand'
+import { validateToken } from './utils.js'
 
-import UtilsService from './services/UtilsService'
 import UserService from './services/UserService'
 import HubService from './services/HubService'
 import SensorService from './services/SensorService'
@@ -40,12 +40,8 @@ app.post(base_path + '/users', async (req, res, next) => {
 })
 
 // Get users
-app.get(base_path + '/users', async (req, res, next) => {
+app.get(base_path + '/users', validateToken, async (req, res, next) => {
   try {
-    UtilsService.validateToken(req)
-    const payload = req.decoded
-    if (!payload || payload.user !== 'benji') throw {status: 401, message: "Authentication error"}
-
     const users = await UserService.getAll()
     res.send({users: users})
   }
@@ -69,6 +65,7 @@ app.get(base_path + '/users/:id', async (req, res, next) => {
 app.post(base_path + '/users/login', async (req, res, next) => {
   try {
     const result = await UserService.login(req)
+    res.cookie('token', result.token, {maxAge: 172800000, httpOnly: true})
     res.send(result)
   }
   catch (err) {
@@ -77,9 +74,10 @@ app.post(base_path + '/users/login', async (req, res, next) => {
 })
 
 // Logout user
-app.get(base_path + '/users/:username', async (req, res, next) => {
+app.get(base_path + '/users/logout/:id', async (req, res, next) => {
   try {
     const user = await UserService.get(req)
+    res.clearCookie('token')
     res.send({user: user})
   }
   catch (err) {
