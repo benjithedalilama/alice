@@ -9,6 +9,7 @@ import SensorReading from './models/SensorReading'
 import ControlCode from './models/ControlCode'
 import ControlCommand from './models/ControlCommand'
 
+import UtilsService from './services/UtilsService'
 import UserService from './services/UserService'
 import HubService from './services/HubService'
 import SensorService from './services/SensorService'
@@ -30,6 +31,22 @@ app.post(base_path + '/users', async (req, res, next) => {
   try {
     const user = await UserService.create(req)
     res.send({user: user})
+  }
+  catch (err) {
+    next(err)
+  }
+})
+
+// Get users
+app.get(base_path + '/users', async (req, res, next) => {
+  try {
+    UtilsService.validateToken(req)
+    const payload = req.decoded
+
+    if (!payload || payload.user !== 'benji') throw {status: 401, message: "Authentication error"}
+
+    const users = await UserService.getAll()
+    res.send({users: users})
   }
   catch (err) {
     next(err)
@@ -63,17 +80,6 @@ app.get(base_path + '/users/:username', async (req, res, next) => {
   try {
     const user = await UserService.get(req)
     res.send({user: user})
-  }
-  catch (err) {
-    next(err)
-  }
-})
-
-// Get users
-app.get(base_path + '/users', async (req, res, next) => {
-  try {
-    const users = await UserService.getAll()
-    res.send({users: users})
   }
   catch (err) {
     next(err)
