@@ -15,7 +15,7 @@ function validateToken (req, res, next) {
     req.decoded = result
     next()
   } catch (err) {
-    throw err
+    next(err)
   }
 }
 
