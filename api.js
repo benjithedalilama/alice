@@ -1,6 +1,7 @@
 import express from 'express'
 import db from './db'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 
 import User from './models/User'
 import Hub from './models/Hub'
@@ -25,6 +26,7 @@ const app = express()
 const base_path = '/api'
 
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 // Create new user
 app.post(base_path + '/users', async (req, res, next) => {
@@ -42,7 +44,6 @@ app.get(base_path + '/users', async (req, res, next) => {
   try {
     UtilsService.validateToken(req)
     const payload = req.decoded
-
     if (!payload || payload.user !== 'benji') throw {status: 401, message: "Authentication error"}
 
     const users = await UserService.getAll()

@@ -31,7 +31,7 @@ class UserService {
   static async login(req) {
     const user = await User.findOne({username: req.body.username})
     if (!user) throw {status: 404, message: "User not found"}
-    
+
     const isMatch = await user.comparePassword(req.body.password, user.password)
     if (!isMatch) throw {status: 401, message: "Authentication error"}
 
