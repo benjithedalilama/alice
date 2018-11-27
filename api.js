@@ -382,7 +382,6 @@ app.delete(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands
 })
 
 app.use( (err, req, res, next) => {
-  console.log(err)
   res.status(err.status || 500).send(err.message)
 })
 
