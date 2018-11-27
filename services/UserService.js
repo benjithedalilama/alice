@@ -35,7 +35,7 @@ class UserService {
     const isMatch = await user.comparePassword(req.body.password, user.password)
     if (!isMatch) throw {status: 401, message: "Authentication error"}
 
-    const payload = { user: user.username }
+    const payload = { user: user.id }
     const options = { expiresIn: '2d', issuer: 'Mr Beniamino' }
     const secret = process.env.JWT_SECRET
     const token = jwt.sign(payload, secret, options)

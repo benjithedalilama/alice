@@ -74,11 +74,10 @@ app.post(base_path + '/users/login', async (req, res, next) => {
 })
 
 // Logout user
-app.get(base_path + '/users/logout/:id', async (req, res, next) => {
+app.post(base_path + '/users/logout', async (req, res, next) => {
   try {
-    const user = await UserService.get(req)
     res.clearCookie('token')
-    res.send({user: user})
+    res.send({})
   }
   catch (err) {
     next(err)
@@ -383,6 +382,7 @@ app.delete(base_path + '/users/:userId/hubs/:hubId/codes/:controlCodeId/commands
 })
 
 app.use( (err, req, res, next) => {
+  console.log(err)
   res.status(err.status || 500).send(err.message)
 })
 
