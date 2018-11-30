@@ -1,7 +1,7 @@
 import User from '../models/User'
-import ControlCommand from '../models/ControlCommand'
+import Command from '../models/Command'
 
-class ControlCommandService {
+class CommandService {
   static async create(req) {
     const user = await User.findById(req.params.userId)
     if (!user) throw {status: 404, message: "User not found"}
@@ -9,14 +9,14 @@ class ControlCommandService {
     const hub = user.hubs.id(req.params.hubId)
     if (!hub) throw {status: 404, message: "Hub not found"}
 
-    const controlCode = hub.controlCodes.id(req.params.controlCodeId)
-    if (!controlCode) throw {status: 404, message: "ControlCode not found"}
+    const code = hub.codes.id(req.params.codeId)
+    if (!code) throw {status: 404, message: "Code not found"}
 
-    const controlCommand = new ControlCommand(req.body)
-    controlCode.controlCommands.push(controlCommand)
+    const command = new Command(req.body)
+    code.commands.push(command)
     await user.save()
 
-    return controlCommand
+    return command
   }
   static async getAll(req) {
     const user = await User.findById(req.params.userId)
@@ -25,10 +25,10 @@ class ControlCommandService {
     const hub = user.hubs.id(req.params.hubId)
     if (!hub) throw {status: 404, message: "Hub not found"}
 
-    const controlCode = hub.controlCodes.id(req.params.controlCodeId)
-    if (!controlCode) throw {status: 404, message: "ControlCode not found"}
+    const code = hub.codes.id(req.params.codeId)
+    if (!code) throw {status: 404, message: "Code not found"}
 
-    return controlCode.controlCommands
+    return code.commands
   }
   static async get(req) {
     const user = await User.findById(req.params.userId)
@@ -37,13 +37,13 @@ class ControlCommandService {
     const hub = user.hubs.id(req.params.hubId)
     if (!hub) throw {status: 404, message: "Hub not found"}
 
-    const controlCode = hub.controlCodes.id(req.params.controlCodeId)
-    if (!controlCode) throw {status: 404, message: "ControlCode not found"}
+    const code = hub.codes.id(req.params.codeId)
+    if (!code) throw {status: 404, message: "Code not found"}
 
-    const controlCommand = controlCode.controlCommands.id(req.params.id)
-    if (!controlCommand) throw {status: 404, message: "ControlCommand not found"}
+    const command = code.commands.id(req.params.id)
+    if (!command) throw {status: 404, message: "Command not found"}
 
-    return controlCommand
+    return command
   }
   static async update(req) {
     const user = await User.findById(req.params.userId)
@@ -52,16 +52,16 @@ class ControlCommandService {
     const hub = user.hubs.id(req.params.hubId)
     if (!hub) throw {status: 404, message: "Hub not found"}
 
-    const controlCode = hub.controlCodes.id(req.params.controlCodeId)
-    if (!controlCode) throw {status: 404, message: "ControlCode not found"}
+    const code = hub.codes.id(req.params.codeId)
+    if (!code) throw {status: 404, message: "Code not found"}
 
-    const controlCommand = controlCode.controlCommands.id(req.params.id)
-    if (!controlCommand) throw {status: 404, message: "ControlCommand not found"}
+    const command = code.commands.id(req.params.id)
+    if (!command) throw {status: 404, message: "Command not found"}
 
-    controlCommand.set(req.body)
+    command.set(req.body)
     await user.save()
 
-    return controlCommand
+    return command
   }
   static async delete(req) {
     const user = await User.findById(req.params.userId)
@@ -70,15 +70,15 @@ class ControlCommandService {
     const hub = user.hubs.id(req.params.hubId)
     if (!hub) throw {status: 404, message: "Hub not found"}
 
-    const controlCode = hub.controlCodes.id(req.params.controlCodeId)
-    if (!controlCode) throw {status: 404, message: "ControlCode not found"}
+    const code = hub.codes.id(req.params.codeId)
+    if (!code) throw {status: 404, message: "Code not found"}
 
-    const controlCommand = controlCode.controlCommands.id(req.params.id)
-    if (!controlCommand) throw {status: 404, message: "ControlCommand not found"}
-    controlCommand.remove()
+    const command = code.commands.id(req.params.id)
+    if (!command) throw {status: 404, message: "Command not found"}
+    command.remove()
 
     return user.save()
   }
 }
 
-export default ControlCommandService
+export default CommandService

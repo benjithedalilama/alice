@@ -18,9 +18,9 @@ tags:
   description: "Remote sensor on hubs"
 - name: "sensorReading"
   description: "Remote sensor on hubs"
-- name: "controlCommand"
+- name: "command"
   description: "Command executed by hub"
-- name: "controlCode"
+- name: "code"
   description: "Control code that issues commands"
 schemes:
 - "https"
@@ -405,20 +405,20 @@ paths:
         type: "string"
       responses:
         204:
-          description: "controlCode deleted operation"
+          description: "code deleted operation"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
           description: "Sensor reading not found"
-  /users/{userId}/hubs/{hubId}/controlCodes:
+  /users/{userId}/hubs/{hubId}/codes:
     post:
       tags:
-      - "controlCode"
-      summary: "Add a new controlCode"
+      - "code"
+      summary: "Add a new code"
       description: ""
-      operationId: "addControlCode"
+      operationId: "addCode"
       consumes:
       - "application/json"
       produces:
@@ -434,7 +434,7 @@ paths:
         description: "{'version': '1.0.0', 'commands':[]}"
         required: true
         schema:
-          $ref: "#/definitions/ControlCode"
+          $ref: "#/definitions/Code"
       - in: "path"
         name: "hubId"
         description: "Hub id"
@@ -447,9 +447,9 @@ paths:
           description: "Forbidden"
     get:
       tags:
-      - "controlCode"
-      summary: "Finds controlCodes by hub"
-      operationId: "findControlCodesByHub"
+      - "code"
+      summary: "Finds codes by hub"
+      operationId: "findCodesByHub"
       produces:
       - "application/json"
       parameters:
@@ -469,19 +469,19 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/ControlCode"
+              $ref: "#/definitions/Code"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
-          description: "controlCode not found"
-  /users/{userId}/hubs/{hubId}/controlCodes/{id}:
+          description: "code not found"
+  /users/{userId}/hubs/{hubId}/codes/{id}:
     get:
       tags:
-      - "controlCode"
-      summary: "Finds controlCode by id"
-      operationId: "findControlCodesById"
+      - "code"
+      summary: "Finds code by id"
+      operationId: "findCodesById"
       produces:
       - "application/json"
       parameters:
@@ -492,7 +492,7 @@ paths:
         description: "User id"
       - in: "path"
         name: "id"
-        description: "ControlCode id"
+        description: "Code id"
         required: true
         type: "string"
       - in: "path"
@@ -504,19 +504,19 @@ paths:
         200:
           description: "Successful operation"
           schema:
-            $ref: "#/definitions/ControlCode"
+            $ref: "#/definitions/Code"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
-          description: "controlCode not found"
+          description: "code not found"
     put:
       tags:
-      - "controlCode"
-      summary: "Update an existing controlCode"
+      - "code"
+      summary: "Update an existing code"
       description: ""
-      operationId: "updateControlCode"
+      operationId: "updateCode"
       consumes:
       - "application/json"
       produces:
@@ -532,7 +532,7 @@ paths:
         description: "{'version': '1.0.0', 'commands':[]}"
         required: true
         schema:
-          $ref: "#/definitions/ControlCode"
+          $ref: "#/definitions/Code"
       - in: "path"
         name: "id"
         type: "string"
@@ -546,19 +546,19 @@ paths:
         200:
           description: "Successful operation"
           schema:
-            $ref: "#/definitions/ControlCode"
+            $ref: "#/definitions/Code"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
-          description: "controlCode not found"
+          description: "code not found"
     delete:
       tags:
-      - "controlCode"
-      summary: "Delete a controlCode"
+      - "code"
+      summary: "Delete a code"
       description: ""
-      operationId: "deleteControlCode"
+      operationId: "deleteCode"
       consumes:
       - "application/json"
       produces:
@@ -580,20 +580,20 @@ paths:
         type: "string"
       responses:
         204:
-          description: "controlCode deleted operation"
+          description: "code deleted operation"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
-          description: "ControlCode not found"
-  /users/{userId}/hubs/{hubId}/controlCodes/{controlCodeId}/controlCommands:
+          description: "Code not found"
+  /users/{userId}/hubs/{hubId}/codes/{codeId}/commands:
     post:
       tags:
-      - "controlCommand"
+      - "command"
       summary: "Add a control command"
       description: ""
-      operationId: "addControlCommand"
+      operationId: "addCommand"
       consumes:
       - "application/json"
       produces:
@@ -605,7 +605,7 @@ paths:
         required: true
         description: "User id"
       - in: "path"
-        name: "controlCodeId"
+        name: "codeId"
         type: "string"
         required: true
       - in: "path"
@@ -618,12 +618,12 @@ paths:
         description: "{'action': 'setHumidity', 'data': 0.2}"
         required: true
         schema:
-          $ref: "#/definitions/ControlCommand"
+          $ref: "#/definitions/Command"
       responses:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/ControlCommand"
+            $ref: "#/definitions/Command"
         400:
           description: "Invalid ID supplied"
         403:
@@ -632,10 +632,10 @@ paths:
           description: "Control code not found"
     get:
       tags:
-      - "controlCommand"
-      summary: "Get controlCode controlCommands"
+      - "command"
+      summary: "Get code commands"
       description: ""
-      operationId: "getControlCommands"
+      operationId: "getCommands"
       consumes:
       - "application/json"
       produces:
@@ -647,7 +647,7 @@ paths:
         required: true
         description: "User id"
       - in: "path"
-        name: "controlCodeId"
+        name: "codeId"
         type: "string"
         required: true
       - in: "path"
@@ -661,20 +661,20 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/ControlCommand"
+              $ref: "#/definitions/Command"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
-          description: "Control code controlCommand not found"
-  /users/{userId}/hubs/{hubId}/controlCodes/{controlCodeId}/controlCommands/{id}:
+          description: "Control code command not found"
+  /users/{userId}/hubs/{hubId}/codes/{codeId}/commands/{id}:
     get:
       tags:
-      - "controlCommand"
+      - "command"
       summary: "Find a control command"
       description: ""
-      operationId: "getControlCommand"
+      operationId: "getCommand"
       consumes:
       - "application/json"
       produces:
@@ -695,7 +695,7 @@ paths:
         required: true
         type: "string"
       - in: "path"
-        name: "controlCodeId"
+        name: "codeId"
         description: "Control code id"
         required: true
         type: "string"
@@ -703,19 +703,19 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/ControlCommand"
+            $ref: "#/definitions/Command"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
-          description: "Control code controlCommand not found"
+          description: "Control code command not found"
     put:
       tags:
-      - "controlCommand"
+      - "command"
       summary: "Update a control command"
       description: ""
-      operationId: "updateControlCommand"
+      operationId: "updateCommand"
       consumes:
       - "application/json"
       produces:
@@ -736,7 +736,7 @@ paths:
         required: true
         type: "string"
       - in: "path"
-        name: "controlCodeId"
+        name: "codeId"
         description: "Control code id"
         required: true
         type: "string"
@@ -745,24 +745,24 @@ paths:
         description: "{'action': 'setHumidity', 'data': 0.2}"
         required: true
         schema:
-          $ref: "#/definitions/ControlCommand"
+          $ref: "#/definitions/Command"
       responses:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/ControlCommand"
+            $ref: "#/definitions/Command"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
-          description: "Control code controlCommand not found"
+          description: "Control code command not found"
     delete:
       tags:
-      - "controlCommand"
-      summary: "Delete controlCode controlCommand"
+      - "command"
+      summary: "Delete code command"
       description: ""
-      operationId: "deleteControlCommands"
+      operationId: "deleteCommands"
       consumes:
       - "application/json"
       produces:
@@ -783,19 +783,19 @@ paths:
         required: true
         type: "string"
       - in: "path"
-        name: "controlCodeId"
+        name: "codeId"
         description: "Control code id"
         required: true
         type: "string"
       responses:
         204:
-          description: "controlCode deleted operation"
+          description: "code deleted operation"
         400:
           description: "Invalid ID supplied"
         403:
           description: "Forbidden"
         404:
-          description: "ControlCode controlCommand not found"
+          description: "Code command not found"
   /users:
     post:
       tags:
@@ -1130,10 +1130,10 @@ definitions:
         type: "array"
         items:
             $ref: "#/definitions/Sensor"
-      controlCodes:
+      codes:
         type: "array"
         items:
-            $ref: "#/definitions/ControlCode"
+            $ref: "#/definitions/Code"
   Sensor:
     type: "object"
     properties:
@@ -1167,7 +1167,7 @@ definitions:
         - "readTemperature"
       data:
         type: "number"
-  ControlCode:
+  Code:
     type: "object"
     properties:
       id:
@@ -1179,11 +1179,11 @@ definitions:
         enum:
         - "setHumidity"
         - "setTemperature"
-      controlCommands:
+      commands:
         type: "array"
         items:
-            $ref: "#/definitions/ControlCommand"
-  ControlCommand:
+            $ref: "#/definitions/Command"
+  Command:
     type: "object"
     properties:
       id:

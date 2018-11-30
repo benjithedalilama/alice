@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const ControlCommandSchema = new Schema({
+const CommandSchema = new Schema({
     id: mongoose.Types.ObjectId,
     createdAt: Date,
     action: {
@@ -13,6 +13,6 @@ const ControlCommandSchema = new Schema({
     data: Number
 })
 
-const ControlCommand = mongoose.model('ControlCommand', ControlCommandSchema)
+const Command = mongoose.model('Command', CommandSchema)
 
-export default ControlCommand
+export default Command

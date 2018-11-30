@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
-import ControlCommand from './ControlCommand'
+import Command from './Command'
 
 const Schema = mongoose.Schema
 
-const ControlCodeSchema = new Schema({
+const CodeSchema = new Schema({
     id: mongoose.Types.ObjectId,
     version: String,
     action: {
@@ -11,9 +11,9 @@ const ControlCodeSchema = new Schema({
       enum: ['setHumidity','setTemperature'],
       default: 'setHumidity'
     },
-    controlCommands: [ControlCommand.schema]
+    commands: [Command.schema]
 })
 
-const ControlCode = mongoose.model('ControlCode', ControlCodeSchema)
+const Code = mongoose.model('Code', CodeSchema)
 
-export default ControlCode
+export default Code
