@@ -16,7 +16,7 @@ tags:
   description: "A raspi remote machine"
 - name: "sensor"
   description: "Remote sensor on hubs"
-- name: "sensorReading"
+- name: "reading"
   description: "Remote sensor on hubs"
 - name: "command"
   description: "Command executed by hub"
@@ -206,10 +206,10 @@ paths:
   /users/{userId}/hubs/{hubId}/sensors/{sensorId}/readings:
     post:
       tags:
-      - "sensorReading"
+      - "reading"
       summary: "Add a sensor reading"
       description: ""
-      operationId: "addSensorReading"
+      operationId: "addReading"
       consumes:
       - "application/json"
       produces:
@@ -234,12 +234,12 @@ paths:
         description: "{'action': 'readHumidity','data': 0.1}"
         required: true
         schema:
-          $ref: "#/definitions/SensorReading"
+          $ref: "#/definitions/Reading"
       responses:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/SensorReading"
+            $ref: "#/definitions/Reading"
         400:
           description: "Invalid ID supplied"
         403:
@@ -248,7 +248,7 @@ paths:
           description: "Sensor not found"
     get:
       tags:
-      - "sensorReading"
+      - "reading"
       summary: "Get sensor readings"
       description: ""
       operationId: "getReadings"
@@ -277,7 +277,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/SensorReading"
+              $ref: "#/definitions/Reading"
         400:
           description: "Invalid ID supplied"
         403:
@@ -287,7 +287,7 @@ paths:
   /users/{userId}/hubs/{hubId}/sensors/{sensorId}/readings/{id}:
     get:
       tags:
-      - "sensorReading"
+      - "reading"
       summary: "Find a sensor reading"
       description: ""
       operationId: "getReading"
@@ -319,7 +319,7 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/SensorReading"
+            $ref: "#/definitions/Reading"
         400:
           description: "Invalid ID supplied"
         403:
@@ -328,7 +328,7 @@ paths:
           description: "Sensor readings not found"
     put:
       tags:
-      - "sensorReading"
+      - "reading"
       summary: "Update a sensor reading"
       description: ""
       operationId: "updateReading"
@@ -361,12 +361,12 @@ paths:
         description: "{'action': 'readHumidity','data': 0.1}"
         required: true
         schema:
-          $ref: "#/definitions/SensorReading"
+          $ref: "#/definitions/Reading"
       responses:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/SensorReading"
+            $ref: "#/definitions/Reading"
         400:
           description: "Invalid ID supplied"
         403:
@@ -375,7 +375,7 @@ paths:
           description: "Sensor readings not found"
     delete:
       tags:
-      - "sensorReading"
+      - "reading"
       summary: "Delete sensor readings"
       description: ""
       operationId: "deleteReadings"
@@ -1148,11 +1148,11 @@ definitions:
       createdAt:
         type: "string"
         format: "date-time"
-      sensorReadings:
+      readings:
         type: "array"
         items:
-            $ref: "#/definitions/SensorReading"
-  SensorReading:
+            $ref: "#/definitions/Reading"
+  Reading:
     type: "object"
     properties:
       id:

@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser'
 import User from './models/User'
 import Hub from './models/Hub'
 import Sensor from './models/Sensor'
-import SensorReading from './models/SensorReading'
+import Reading from './models/Reading'
 import Code from './models/Code'
 import Command from './models/Command'
 import { validateToken } from './utils.js'
@@ -14,7 +14,7 @@ import { validateToken } from './utils.js'
 import UserService from './services/UserService'
 import HubService from './services/HubService'
 import SensorService from './services/SensorService'
-import SensorReadingService from './services/SensorReadingService'
+import ReadingService from './services/ReadingService'
 import CodeService from './services/CodeService'
 import CommandService from './services/CommandService'
 
@@ -216,11 +216,11 @@ app.delete(base_path + '/users/:userId/hubs/:hubId/sensors/:id', async (req, res
   }
 })
 
-// Create new sensorReading
+// Create new reading
 app.post(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings', async (req, res, next) => {
   try {
-    const sensorReading = await SensorReadingService.create(req)
-    res.send({sensorReading: sensorReading})
+    const reading = await ReadingService.create(req)
+    res.send({reading: reading})
   }
   catch (err) {
     next(err)
@@ -230,40 +230,40 @@ app.post(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings', as
 // Get all sensors by hub
 app.get(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings', async (req, res, next) => {
   try {
-    const sensorReadings = await SensorReadingService.getAll(req)
-    res.send({sensorReadings: sensorReadings})
+    const readings = await ReadingService.getAll(req)
+    res.send({readings: readings})
   }
   catch (err) {
     next(err)
   }
 })
 
-// Get sensorReading by id
+// Get reading by id
 app.get(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id', async (req, res, next) => {
   try {
-    const sensorReading = await SensorReadingService.get(req)
-    res.send({sensorReading: sensorReading})
+    const reading = await ReadingService.get(req)
+    res.send({reading: reading})
   }
   catch (err) {
     next(err)
   }
 })
 
-// Update sensorReading by id
+// Update reading by id
 app.put(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id', async (req, res, next) => {
   try {
-    const sensorReading = await SensorReadingService.update(req)
-    res.send({sensorReading: sensorReading})
+    const reading = await ReadingService.update(req)
+    res.send({reading: reading})
   }
   catch (err) {
     next(err)
   }
 })
 
-// Delete sensorReading by id
+// Delete reading by id
 app.delete(base_path + '/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id', async (req, res, next) => {
   try {
-    await SensorReadingService.delete(req)
+    await ReadingService.delete(req)
     res.status(204).send({})
   }
   catch (err) {
