@@ -2,6 +2,7 @@ import express from 'express'
 import db from './db'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 
 import User from './models/User'
 import Hub from './models/Hub'
@@ -27,6 +28,7 @@ const base_path = '/api'
 
 app.use(bodyParser.json())
 app.use(cookieParser())
+app.use(cors())
 
 // Create new user
 app.post(base_path + '/users', async (req, res, next) => {
