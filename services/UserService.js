@@ -40,7 +40,7 @@ class UserService {
     const secret = process.env.JWT_SECRET
     const token = jwt.sign(payload, secret, options)
 
-    return {user: user, token: token}
+    return {user, token}
   }
 }
 

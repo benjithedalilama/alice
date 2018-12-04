@@ -65,7 +65,8 @@ app.get(base_path + '/users/:id', async (req, res, next) => {
 app.post(base_path + '/users/login', async (req, res, next) => {
   try {
     const result = await UserService.login(req)
-    res.cookie('token', result.token, {maxAge: 172800000, httpOnly: true})
+    res.cookie('token', result.token, {maxAge: 172800000})
+    res.cookie('user', result.user, {maxAge: 172800000})
     res.send(result)
   }
   catch (err) {
@@ -77,6 +78,7 @@ app.post(base_path + '/users/login', async (req, res, next) => {
 app.post(base_path + '/users/logout', async (req, res, next) => {
   try {
     res.clearCookie('token')
+    res.clearCookie('user')
     res.send({})
   }
   catch (err) {
