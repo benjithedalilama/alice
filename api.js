@@ -26,9 +26,14 @@ const app = express()
 
 const base_path = '/api'
 
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true
+}
+
 app.use(bodyParser.json())
 app.use(cookieParser())
-app.use(cors())
+app.use(cors(corsOptions))
 
 // Create new user
 app.post(base_path + '/users', async (req, res, next) => {
@@ -68,7 +73,7 @@ app.post(base_path + '/users/login', async (req, res, next) => {
   try {
     const result = await UserService.login(req)
     res.cookie('token', result.token, {maxAge: 172800000})
-    res.cookie('user', result.user, {maxAge: 172800000})
+    res.cookie('userId', JSON.parse(JSON.stringify(result.user._id)), {maxAge: 172800000})
     res.send(result)
   }
   catch (err) {
@@ -80,7 +85,7 @@ app.post(base_path + '/users/login', async (req, res, next) => {
 app.post(base_path + '/users/logout', async (req, res, next) => {
   try {
     res.clearCookie('token')
-    res.clearCookie('user')
+    res.clearCookie('userId')
     res.send({})
   }
   catch (err) {
@@ -125,7 +130,7 @@ app.post(base_path + '/users/:userId/hubs', async (req, res, next) => {
 app.get(base_path + '/users/:userId/hubs', async (req, res, next) => {
   try {
     const hubs = await HubService.getAll(req)
-    res.send({hubs: hubs})
+    res.send({ hubs: hubs })
   }
   catch (err) {
     next(err)
