@@ -6,7 +6,10 @@ const Schema = mongoose.Schema
 const SensorSchema = new Schema({
     id: mongoose.Types.ObjectId,
     type: String,
-    createdAt: Date,
+    createdAt: {
+      type: Date,
+      default: Date.now
+    },
     readings: [Reading.schema]
 })
 

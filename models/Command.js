@@ -4,7 +4,10 @@ const Schema = mongoose.Schema
 
 const CommandSchema = new Schema({
     id: mongoose.Types.ObjectId,
-    createdAt: Date,
+    createdAt: {
+      type: Date,
+      default: Date.now
+    },
     action: {
       type: String,
       enum: ['setHumidity','setTemperature'],

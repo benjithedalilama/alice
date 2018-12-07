@@ -9,7 +9,10 @@ const HubSchema = new Schema({
     name: String,
     location: [Number, Number],
     deployed: Boolean,
-    createdAt: Date,
+    createdAt: {
+      type: Date,
+      default: Date.now
+    },
     sensors: [Sensor.schema],
     codes: [Code.schema]
 })
