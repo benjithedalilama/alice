@@ -47,7 +47,7 @@ app.post(`${base_path}/users`, async (req, res, next) => {
 })
 
 // Get users
-app.get(`${base_path}/users', validateToken` async (req, res, next) => {
+app.get(`${base_path}/users`, validateToken, async (req, res, next) => {
   try {
     const users = await UserService.getAll()
     res.send({users: users})
