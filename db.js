@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import {} from 'dotenv/config'
 import User from './models/User'
 
 const connectionUrl = process.env.MONGO_LOCAL_CONN_URL
