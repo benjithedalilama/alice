@@ -59,7 +59,7 @@ app.get(`${base_path}/users`, validateToken, async (req, res, next) => {
 })
 
 // Get user by id
-app.get(`${base_path}/users/:id`, async (req, res, next) => {
+app.get(`${base_path}/users/:id`, validateToken, async (req, res, next) => {
   try {
     const user = await UserService.get(req)
     res.send({user: user})
@@ -95,7 +95,7 @@ app.post(`${base_path}/users/logout`, async (req, res, next) => {
 })
 
 // Update user by id
-app.put(`${base_path}/users/:id`, async (req, res, next) => {
+app.put(`${base_path}/users/:id`, validateToken, async (req, res, next) => {
   try {
     const user = await UserService.update(req)
     res.send({user: user})
@@ -106,7 +106,7 @@ app.put(`${base_path}/users/:id`, async (req, res, next) => {
 })
 
 // Delete user by id
-app.delete(`${base_path}/users/:id`, async (req, res, next) => {
+app.delete(`${base_path}/users/:id`, validateToken, async (req, res, next) => {
   try {
     await UserService.delete(req)
     res.status(204).send({})
@@ -117,7 +117,7 @@ app.delete(`${base_path}/users/:id`, async (req, res, next) => {
 })
 
 // Create new hub
-app.post(`${base_path}/users/:userId/hubs`, async (req, res, next) => {
+app.post(`${base_path}/users/:userId/hubs`, validateToken, async (req, res, next) => {
   try {
     const hub = await HubService.create(req)
     res.send({hub: hub})
@@ -128,7 +128,7 @@ app.post(`${base_path}/users/:userId/hubs`, async (req, res, next) => {
 })
 
 // Get hubs
-app.get(`${base_path}/users/:userId/hubs`, async (req, res, next) => {
+app.get(`${base_path}/users/:userId/hubs`, validateToken, async (req, res, next) => {
   try {
     const hubs = await HubService.getAll(req)
     res.send({ hubs: hubs })
@@ -139,7 +139,7 @@ app.get(`${base_path}/users/:userId/hubs`, async (req, res, next) => {
 })
 
 // Get hub by id
-app.get(`${base_path}/users/:userId/hubs/:id`, async (req, res, next) => {
+app.get(`${base_path}/users/:userId/hubs/:id`, validateToken, async (req, res, next) => {
   try {
     const hub = await HubService.get(req)
     res.send({hub: hub})
@@ -150,7 +150,7 @@ app.get(`${base_path}/users/:userId/hubs/:id`, async (req, res, next) => {
 })
 
 // Update hub by id
-app.put(`${base_path}/users/:userId/hubs/:id`, async (req, res, next) => {
+app.put(`${base_path}/users/:userId/hubs/:id`, validateToken, async (req, res, next) => {
   try {
     const hub = await HubService.update(req)
     res.send({hub: hub})
@@ -161,7 +161,7 @@ app.put(`${base_path}/users/:userId/hubs/:id`, async (req, res, next) => {
 })
 
 // Delete hub by id
-app.delete(`${base_path}/users/:userId/hubs/:id`, async (req, res, next) => {
+app.delete(`${base_path}/users/:userId/hubs/:id`, validateToken, async (req, res, next) => {
   try {
     await HubService.delete(req)
     res.status(204).send({})
@@ -172,7 +172,7 @@ app.delete(`${base_path}/users/:userId/hubs/:id`, async (req, res, next) => {
 })
 
 // Create new sensor
-app.post(`${base_path}/users/:userId/hubs/:hubId/sensors`, async (req, res, next) => {
+app.post(`${base_path}/users/:userId/hubs/:hubId/sensors`, validateToken, async (req, res, next) => {
   try {
     const sensor = await SensorService.create(req)
     res.send({sensor: sensor})
@@ -183,7 +183,7 @@ app.post(`${base_path}/users/:userId/hubs/:hubId/sensors`, async (req, res, next
 })
 
 // Get all sensors by hub
-app.get(`${base_path}/users/:userId/hubs/:hubId/sensors`, async (req, res, next) => {
+app.get(`${base_path}/users/:userId/hubs/:hubId/sensors`, validateToken, async (req, res, next) => {
   try {
     const sensors = await SensorService.getAll(req)
     res.send({sensors: sensors})
@@ -194,7 +194,7 @@ app.get(`${base_path}/users/:userId/hubs/:hubId/sensors`, async (req, res, next)
 })
 
 // Get sensor by id
-app.get(`${base_path}/users/:userId/hubs/:hubId/sensors/:id`, async (req, res, next) => {
+app.get(`${base_path}/users/:userId/hubs/:hubId/sensors/:id`, validateToken, async (req, res, next) => {
   try {
     const sensor = await SensorService.get(req)
     res.send({sensor: sensor})
@@ -205,7 +205,7 @@ app.get(`${base_path}/users/:userId/hubs/:hubId/sensors/:id`, async (req, res, n
 })
 
 // Update sensor by id
-app.put(`${base_path}/users/:userId/hubs/:hubId/sensors/:id`, async (req, res, next) => {
+app.put(`${base_path}/users/:userId/hubs/:hubId/sensors/:id`, validateToken, async (req, res, next) => {
   try {
     const sensor = await SensorService.update(req)
     res.send({sensor: sensor})
@@ -216,7 +216,7 @@ app.put(`${base_path}/users/:userId/hubs/:hubId/sensors/:id`, async (req, res, n
 })
 
 // Delete sensor by id
-app.delete(`${base_path}/users/:userId/hubs/:hubId/sensors/:id`, async (req, res, next) => {
+app.delete(`${base_path}/users/:userId/hubs/:hubId/sensors/:id`, validateToken, async (req, res, next) => {
   try {
     await SensorService.delete(req)
     res.status(204).send({})
@@ -227,7 +227,7 @@ app.delete(`${base_path}/users/:userId/hubs/:hubId/sensors/:id`, async (req, res
 })
 
 // Create new reading
-app.post(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings`, async (req, res, next) => {
+app.post(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings`, validateToken, async (req, res, next) => {
   try {
     const reading = await ReadingService.create(req)
     res.send({reading: reading})
@@ -238,7 +238,7 @@ app.post(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings`, as
 })
 
 // Get all sensors by hub
-app.get(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings`, async (req, res, next) => {
+app.get(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings`, validateToken, async (req, res, next) => {
   try {
     const readings = await ReadingService.getAll(req)
     res.send({readings: readings})
@@ -249,7 +249,7 @@ app.get(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings`, asy
 })
 
 // Get reading by id
-app.get(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id`, async (req, res, next) => {
+app.get(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id`, validateToken, async (req, res, next) => {
   try {
     const reading = await ReadingService.get(req)
     res.send({reading: reading})
@@ -260,7 +260,7 @@ app.get(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id`,
 })
 
 // Update reading by id
-app.put(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id`, async (req, res, next) => {
+app.put(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id`, validateToken, async (req, res, next) => {
   try {
     const reading = await ReadingService.update(req)
     res.send({reading: reading})
@@ -271,7 +271,7 @@ app.put(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id`,
 })
 
 // Delete reading by id
-app.delete(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id`, async (req, res, next) => {
+app.delete(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:id`, validateToken, async (req, res, next) => {
   try {
     await ReadingService.delete(req)
     res.status(204).send({})
@@ -282,7 +282,7 @@ app.delete(`${base_path}/users/:userId/hubs/:hubId/sensors/:sensorId/readings/:i
 })
 
 // Create new code
-app.post(`${base_path}/users/:userId/hubs/:hubId/codes`, async (req, res, next) => {
+app.post(`${base_path}/users/:userId/hubs/:hubId/codes`, validateToken, async (req, res, next) => {
   try {
     const code = await CodeService.create(req)
     res.send({code: code})
@@ -293,7 +293,7 @@ app.post(`${base_path}/users/:userId/hubs/:hubId/codes`, async (req, res, next) 
 })
 
 // Get all codes by hub
-app.get(`${base_path}/users/:userId/hubs/:hubId/codes`, async (req, res, next) => {
+app.get(`${base_path}/users/:userId/hubs/:hubId/codes`, validateToken, async (req, res, next) => {
   try {
     const codes = await CodeService.getAll(req)
     res.send({codes: codes})
@@ -304,7 +304,7 @@ app.get(`${base_path}/users/:userId/hubs/:hubId/codes`, async (req, res, next) =
 })
 
 // Get code by id
-app.get(`${base_path}/users/:userId/hubs/:hubId/codes/:id`, async (req, res, next) => {
+app.get(`${base_path}/users/:userId/hubs/:hubId/codes/:id`, validateToken, async (req, res, next) => {
   try {
     const code = await CodeService.get(req)
     res.send({code: code})
@@ -315,7 +315,7 @@ app.get(`${base_path}/users/:userId/hubs/:hubId/codes/:id`, async (req, res, nex
 })
 
 // Update code by id
-app.put(`${base_path}/users/:userId/hubs/:hubId/codes/:id`, async (req, res, next) => {
+app.put(`${base_path}/users/:userId/hubs/:hubId/codes/:id`, validateToken, async (req, res, next) => {
   try {
     const code = await CodeService.update(req)
     res.send({code: code})
@@ -326,7 +326,7 @@ app.put(`${base_path}/users/:userId/hubs/:hubId/codes/:id`, async (req, res, nex
 })
 
 // Delete code by id
-app.delete(`${base_path}/users/:userId/hubs/:hubId/codes/:id`, async (req, res, next) => {
+app.delete(`${base_path}/users/:userId/hubs/:hubId/codes/:id`, validateToken, async (req, res, next) => {
   try {
     await CodeService.delete(req)
     res.status(204).send({})
@@ -337,7 +337,7 @@ app.delete(`${base_path}/users/:userId/hubs/:hubId/codes/:id`, async (req, res, 
 })
 
 // Create new command
-app.post(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands`, async (req, res, next) => {
+app.post(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands`, validateToken, async (req, res, next) => {
   try {
     const command = await CommandService.create(req)
     res.send({command: command})
@@ -348,7 +348,7 @@ app.post(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands`, async 
 })
 
 // Get all commands by hub
-app.get(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands`, async (req, res, next) => {
+app.get(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands`, validateToken, async (req, res, next) => {
   try {
     const commands = await CommandService.getAll(req)
     res.send({commands: commands})
@@ -359,7 +359,7 @@ app.get(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands`, async (
 })
 
 // Get command by id
-app.get(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands/:id`, async (req, res, next) => {
+app.get(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands/:id`, validateToken, async (req, res, next) => {
   try {
     const command = await CommandService.get(req)
     res.send({command: command})
@@ -370,7 +370,7 @@ app.get(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands/:id`, asy
 })
 
 // Update command by id
-app.put(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands/:id`, async (req, res, next) => {
+app.put(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands/:id`, validateToken, async (req, res, next) => {
   try {
     const command = await CommandService.update(req)
     res.send({command: command})
@@ -381,7 +381,7 @@ app.put(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands/:id`, asy
 })
 
 // Delete command by id
-app.delete(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands/:id`, async (req, res, next) => {
+app.delete(`${base_path}/users/:userId/hubs/:hubId/codes/:codeId/commands/:id`, validateToken, async (req, res, next) => {
   try {
     await CommandService.delete(req)
     res.status(204).send({})
