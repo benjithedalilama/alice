@@ -5,7 +5,7 @@ COPY yarn.lock ./
 
 RUN yarn global add nodemon
 RUN yarn install
-COPY . /app
+COPY . .
 EXPOSE 8080
 
 CMD [ "node", "index.js" ]
